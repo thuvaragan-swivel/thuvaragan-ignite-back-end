@@ -8,7 +8,7 @@ import Employee from "../model/employee-model.js";
 //     }
 // }
 
-export const create = async (req, res) => {
+export const createEmployee = async (req, res) => {
   try {
     const newEmployee = new Employee(req.body);
     const { emailAddress } = newEmployee;

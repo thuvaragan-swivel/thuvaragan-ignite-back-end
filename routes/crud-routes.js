@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  create,
+  createEmployee,
   getAllEmployees,
   getEmployeeById,
   updateEmployee,
@@ -9,8 +9,8 @@ import {
 
 const expressRoute = express.Router();
 
-expressRoute.post("/employee", create);
-expressRoute.get("/employees", getAllEmployees);
+expressRoute.post("/employee", createEmployee);
+expressRoute.get("/employee", getAllEmployees);
 expressRoute.get("/employee/:id", getEmployeeById);
 expressRoute.put("/update/employee/:id", updateEmployee);
 expressRoute.delete("/delete/employee/:id", deleteEmployee);
