@@ -19,7 +19,7 @@ const phoneNumberValidator = {
     return /^\+94\d{9}$/.test(v);
   },
   message: (props) =>
-    `${props.value} is not a valid Sri Lankan Phone Number! (Please start with +94)`,
+    `${props.value} is not a valid Sri Lankan Phone Number!`,
 };
 
 const employeeSchema = new mongoose.Schema(
