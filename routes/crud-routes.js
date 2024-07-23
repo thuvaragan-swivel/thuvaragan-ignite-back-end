@@ -5,7 +5,7 @@ import {
   getEmployeeById,
   updateEmployee,
   deleteEmployee,
-} from "../crud-operations/employee-crud.js";
+} from "../crud-operations-controller/employee-crud.js";
 
 const expressRoute = express.Router();
 
