@@ -4,7 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import expressRoute from "./routes/employee-route.js";
+import expressRoute from "./routes/crud-routes.js";
 
 // const express = require("express")
 const expressApp = express();
