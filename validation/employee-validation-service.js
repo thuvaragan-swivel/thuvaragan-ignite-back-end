@@ -1,5 +1,6 @@
 import * as yup from "yup";
 
+// This is for the Employee Data Validation.
 class EmployeeValidationService {
   static employeeValidationSchema = yup.object({
     firstName: yup
@@ -43,7 +44,7 @@ class EmployeeValidationService {
 
     employeeId: yup.string().required("Employee ID is Required!"),
 
-    photoImg: yup.mixed(), // Adjust as needed based on your use case
+    photoImg: yup.mixed(),
   });
 
   static async validate(data) {
