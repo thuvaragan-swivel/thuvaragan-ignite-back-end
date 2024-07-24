@@ -1,6 +1,7 @@
 import Employee from "../model/employee-model.js";
 import EmployeeValidationService from "../validation/employee-validation-service.js";
 
+// Create an Employee data.
 export const createEmployee = async (req, res) => {
   try {
     const validationResult = await validateAndCheckExistingEmployee(req.body);
@@ -13,12 +14,13 @@ export const createEmployee = async (req, res) => {
     const newEmployee = new Employee(req.body);
     const savedEmployeeData = await newEmployee.save();
 
-    res.status(200).json(savedEmployeeData);
+    res.status(201).json(savedEmployeeData);
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }
 };
 
+// Retrieve all Employees data.
 export const getAllEmployees = async (req, res) => {
   try {
     const employeeData = await Employee.find();
@@ -26,7 +28,7 @@ export const getAllEmployees = async (req, res) => {
     if (!employeeData || employeeData.length === 0) {
       return res
         .status(404)
-        .json({ message: "The Employees Data is not Found in the System!" });
+        .json({ message: "No Employees found in the system!" });
     }
     res.status(200).json(employeeData);
   } catch (error) {
@@ -34,6 +36,7 @@ export const getAllEmployees = async (req, res) => {
   }
 };
 
+// Retrieve an Employee data using employeeId.
 export const getEmployeeById = async (req, res) => {
   try {
     const employeeId = req.params.id;
@@ -50,6 +53,7 @@ export const getEmployeeById = async (req, res) => {
   }
 };
 
+// Update an Employee data using employeeId.
 export const updateEmployee = async (req, res) => {
   try {
     const employeeId = req.params.id;
@@ -83,6 +87,7 @@ export const updateEmployee = async (req, res) => {
   }
 };
 
+// Delete an Employee data using employeeId.
 export const deleteEmployee = async (req, res) => {
   try {
     const employeeId = req.params.id;
@@ -94,7 +99,7 @@ export const deleteEmployee = async (req, res) => {
         .json({ message: employeeExists.message });
     }
 
-    const deleteEmployeeData = await Employee.findOneAndDelete({ employeeId });
+    await Employee.findOneAndDelete({ employeeId });
 
     res.status(200).json({
       message: `The Employee with ID: [${employeeId}] is deleted successfully.`,
@@ -104,7 +109,7 @@ export const deleteEmployee = async (req, res) => {
   }
 };
 
-// Helper function to validate and check for existing email and employee ID
+// To validate and check for existing Email and Employee ID.
 const validateAndCheckExistingEmployee = async (data, id = null) => {
   const validationErrors = await EmployeeValidationService.validate(data);
   if (validationErrors) {
@@ -113,13 +118,12 @@ const validateAndCheckExistingEmployee = async (data, id = null) => {
       message: validationErrors.join(", "),
     };
   }
-
   const { emailAddress, employeeId } = data;
 
-  // Check for existing email address
+  // Checking for existing email address.
   const emailAddressExist = await Employee.findOne({
     emailAddress,
-    ...(id && { _id: { $ne: id } }), // Exclude current employee if updating
+    ...(id && { _id: { $ne: id } }), // Exclude current employee if updating...
   });
   if (emailAddressExist) {
     return {
@@ -128,10 +132,10 @@ const validateAndCheckExistingEmployee = async (data, id = null) => {
     };
   }
 
-  // Check for existing employee ID
+  // Checking for existing employee ID.
   const employeeIdExist = await Employee.findOne({
     employeeId,
-    ...(id && { _id: { $ne: id } }), // Exclude current employee if updating
+    ...(id && { _id: { $ne: id } }), // Exclude current employee if updating....
   });
   if (employeeIdExist) {
     return {
@@ -140,10 +144,10 @@ const validateAndCheckExistingEmployee = async (data, id = null) => {
     };
   }
 
-  return null; // No errors
+  return null; // No errors.
 };
 
-// Helper function to check if an employee exists by employeeId
+// To check if an employee exists in the database using employeeId.
 const findEmployeeById = async (employeeId) => {
   const employeeExists = await Employee.findOne({ employeeId });
   if (!employeeExists) {
