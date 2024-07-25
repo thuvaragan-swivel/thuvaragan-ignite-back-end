@@ -48,8 +48,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import connectDB from './config/database.js';
-import logger from './config/logger.js';
+import connectDB from './config/mongodb-database.js';
+import logger from './config/server-logger.js';
 import expressRoute from './routes/crud-routes.js';
 
 dotenv.config();
