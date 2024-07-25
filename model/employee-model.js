@@ -13,6 +13,7 @@ const employeeSchema = new mongoose.Schema(
     emailAddress: {
       type: String,
       required: [true, "Email Address is Required!"],
+      unique: true,
     },
     phoneNumber: {
       type: String,
@@ -23,12 +24,13 @@ const employeeSchema = new mongoose.Schema(
       required: [true, "Gender is Required!"],
     },
     employeeId: {
-      type: String,
+      type: Number,
       required: [true, "Employee ID is Required!"],
+      unique: true,
     },
-    photoImg: {
-      type: Buffer,
-    },
+    // photoImg: {
+    //   type: Buffer,
+    // },
   },
   {
     timestamps: true, // This will add createdAt and updatedAt fields.
