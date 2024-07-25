@@ -14,7 +14,7 @@ const expressRoute = express.Router(); // Express Router initiation.
 expressRoute.post("/employee", createEmployee);
 expressRoute.get("/employee", getAllEmployees);
 expressRoute.get("/employee/:id", getEmployeeById);
-expressRoute.put("/update/employee/:id", updateEmployee);
-expressRoute.delete("/delete/employee/:id", deleteEmployee);
+expressRoute.put("/employee/:id", updateEmployee);
+expressRoute.delete("/employee/:id", deleteEmployee);
 
 export default expressRoute;
