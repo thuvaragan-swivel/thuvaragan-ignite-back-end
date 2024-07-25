@@ -42,9 +42,12 @@ class EmployeeValidationService {
 
     gender: yup.string().required("Gender is Required!"),
 
-    employeeId: yup.string().required("Employee ID is Required!"),
+    employeeId: yup
+      .number()
+      .typeError("Employee ID must be a number!")
+      .required("Employee ID is Required!"),
 
-    photoImg: yup.mixed(),
+    // photoImg: yup.mixed(),
   });
 
   static async validate(data) {
@@ -53,7 +56,10 @@ class EmployeeValidationService {
       return null;
     } catch (error) {
       if (error.name === "ValidationError") {
-        return error.errors;
+        return error.inner.reduce((acc, curr) => {
+          acc[curr.path] = curr.message;
+          return acc;
+        }, {});
       }
       throw error;
     }
