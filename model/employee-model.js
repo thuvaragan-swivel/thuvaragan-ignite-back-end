@@ -29,9 +29,6 @@ const employeeSchema = new mongoose.Schema(
       required: [true, "Employee ID is Required!"],
       unique: true,
     },
-    // photoImg: {
-    //   type: Buffer,
-    // },
   },
   {
     timestamps: true, // This will add createdAt and updatedAt fields.

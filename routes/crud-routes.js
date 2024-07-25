@@ -1,20 +1,18 @@
 import express from "express";
-import {
-  // Theses are the Functions for the CRUD Operations.
-  createEmployee,
-  getAllEmployees,
-  getEmployeeById,
-  updateEmployee,
-  deleteEmployee,
-} from "../crud-operations-controller/employee-crud.js";
+
+import CreateEmployeeController from "../crud-operations-controller/create-employee-controller.js";
+import GetAllEmployeesController from "../crud-operations-controller/get-all-employees-controller.js";
+import GetEmployeeController from "../crud-operations-controller/get-employee-controller.js";
+import UpdateEmployeeController from "../crud-operations-controller/update-employee-controller.js";
+import DeleteEmployeeController from "../crud-operations-controller/delete-employee-controller.js";
 
 const expressRouter = express.Router(); // Express Router initiation.
 
 // Defining the Routes for CRUD Operations.
-expressRouter.post("/employee", createEmployee);
-expressRouter.get("/employee", getAllEmployees);
-expressRouter.get("/employee/:id", getEmployeeById);
-expressRouter.put("/employee/:id", updateEmployee);
-expressRouter.delete("/employee/:id", deleteEmployee);
+expressRouter.post("/employee", CreateEmployeeController.createEmployee);
+expressRouter.get("/employee", GetAllEmployeesController.getAllEmployees);
+expressRouter.get("/employee/:id", GetEmployeeController.getEmployeeById);
+expressRouter.put("/employee/:id", UpdateEmployeeController.updateEmployee);
+expressRouter.delete("/employee/:id", DeleteEmployeeController.deleteEmployee);
 
 export default expressRouter;
