@@ -46,8 +46,6 @@ class EmployeeValidationService {
       .number()
       .typeError("Employee ID must be a number!")
       .required("Employee ID is Required!"),
-
-    // photoImg: yup.mixed(),
   });
 
   static async validate(data) {

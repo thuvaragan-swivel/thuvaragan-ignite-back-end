@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const employeeSchema = new mongoose.Schema(
   {
@@ -37,4 +38,7 @@ const employeeSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Employee", employeeSchema, "Employees");
+employeeSchema.plugin(mongoosePaginate);
+
+const Employee = mongoose.model("Employee", employeeSchema, "Employees");
+export default Employee;
