@@ -1,4 +1,4 @@
-import Employee from "../model/employee-model.js";
+import Employee from "../../model/employee-model.js";
 import EmployeeValidationService from "./employee-validation-service.js";
 
 class CrudValidationService {

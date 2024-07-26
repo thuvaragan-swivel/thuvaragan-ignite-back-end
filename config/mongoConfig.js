@@ -1,10 +1,14 @@
 import mongoose from "mongoose";
-import logger from "./server-logger.js";
+import logger from "./loggerConfig.js";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 const MONGO_URL = process.env.MONGODB_URL;
+
+if (!MONGO_URL) {
+  throw new Error("MONGODB_URL environment variable is not defined.");
+}
 
 const connectDB = async () => {
   try {
