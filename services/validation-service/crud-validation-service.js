@@ -13,7 +13,7 @@ class CrudValidationService {
       ...(id && { _id: { $ne: id } }), // Exclude current employee if updating...
     });
     if (emailAddressExist) {
-      errors.emailAddress = `An Employee already exists with the Email ID: ${emailAddress}!`;
+      errors.emailAddress = `An Employee already exists with the Email ID: ${emailAddress} !`;
     }
 
     // Checking for existing employee ID.
@@ -22,7 +22,7 @@ class CrudValidationService {
       ...(id && { _id: { $ne: id } }), // Exclude current employee if updating...
     });
     if (employeeIdExist) {
-      errors.employeeId = `An Employee already exists with the Employee ID: [${employeeId}]!`;
+      errors.employeeId = `An Employee already exists with the Employee ID: ${employeeId} !`;
     }
 
     if (Object.keys(errors).length > 0) {
@@ -40,7 +40,7 @@ class CrudValidationService {
     if (!employeeExists) {
       return {
         status: 404,
-        message: `The Employee with the ID: [${employeeId}] is not Found in the System!`,
+        message: `The Employee with the ID: ${employeeId} is not Found in the System!`,
       };
     }
     return employeeExists;

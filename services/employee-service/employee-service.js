@@ -92,13 +92,13 @@ class EmployeeService {
     if (!updatedEmployeeData) {
       return {
         status: 500,
-        message: "Failed to update the employee.",
+        message: "Failed to Update this Employee Data!",
       };
     }
 
     return {
       status: 200,
-      message: "Employee updated successfully.",
+      message: "The Employee has been Updated Successfully.",
       data: updatedEmployeeData,
     };
   }
@@ -114,7 +114,7 @@ class EmployeeService {
 
     return {
       status: 200,
-      message: `The Employee with ID: [${employeeId}] is deleted successfully.`,
+      message: `The Employee with ID: ${employeeId} is Deleted Successfully.`,
     };
   }
 }

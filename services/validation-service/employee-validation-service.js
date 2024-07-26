@@ -19,14 +19,8 @@ class EmployeeValidationService {
 
     emailAddress: yup
       .string()
-      .email("Email Address must be Valid!")
       .required("Email Address is Required!")
-      .test("contains-at", "Email Address must contain [ @ ]", (value) =>
-        value.includes("@")
-      )
-      .test("contains-dot", "Email Address must contain [ . ]", (value) =>
-        value.includes(".")
-      )
+      .email("Email Address must be in the Format: username@domain.tld")
       .matches(
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         "Email Address must be in the Format: username@domain.tld"
@@ -34,18 +28,18 @@ class EmployeeValidationService {
 
     phoneNumber: yup
       .string()
+      .required("Phone Number is Required!")
       .matches(
         /^\+94\d{9}$/,
         "Phone Number must be a Valid Sri Lankan Phone Number!"
-      )
-      .required("Phone Number is Required!"),
+      ),
 
     gender: yup.string().required("Gender is Required!"),
 
     employeeId: yup
       .number()
-      .typeError("Employee ID must be a number!")
-      .required("Employee ID is Required!"),
+      .required("Employee ID is Required!")
+      .typeError("Employee ID must be a number!"),
   });
 
   static async validate(data) {
@@ -54,10 +48,14 @@ class EmployeeValidationService {
       return null;
     } catch (error) {
       if (error.name === "ValidationError") {
-        return error.inner.reduce((acc, curr) => {
-          acc[curr.path] = curr.message;
+        // Ensure that required errors are shown first
+        const errors = error.inner.reduce((acc, curr) => {
+          if (!acc[curr.path]) {
+            acc[curr.path] = curr.message;
+          }
           return acc;
         }, {});
+        return errors;
       }
       throw error;
     }
