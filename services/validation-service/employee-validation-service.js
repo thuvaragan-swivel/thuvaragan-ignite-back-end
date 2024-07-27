@@ -39,7 +39,9 @@ class EmployeeValidationService {
     employeeId: yup
       .number()
       .required("Employee ID is Required!")
-      .typeError("Employee ID must be a number!"),
+      .typeError("Employee ID must be a Number!")
+      .positive("Employee ID must be a Positive Number!")
+      .integer("Employee ID must be an Integer Value!"),
   });
 
   static async validate(data) {
