@@ -13,7 +13,7 @@ class EmployeeController {
 
   async getAllEmployees(req, res) {
     try {
-      const { search, sort = "asc", page = 1, limit = 10, sortBy = "firstName" } = req.query;
+      const { search, sort = "asc", page = 1, limit = 12, sortBy = "firstName" } = req.query;
       const result = await EmployeeService.getAllEmployees({
         search,
         sort,

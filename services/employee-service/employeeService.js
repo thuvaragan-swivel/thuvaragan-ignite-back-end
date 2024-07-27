@@ -16,7 +16,7 @@ class EmployeeService {
     return { status: 201, data: savedEmployeeData };
   }
 
-  async getAllEmployees({ search, sort = "asc", page = 1, limit = 10, sortBy = 'firstName' }) {
+  async getAllEmployees({ search, sort = "asc", page = 1, limit = 12, sortBy = 'firstName' }) {
     const query = {};
   
     if (search) {
