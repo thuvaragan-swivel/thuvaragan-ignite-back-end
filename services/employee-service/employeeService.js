@@ -1,5 +1,5 @@
-import Employee from "../../model/employee-model.js";
-import CrudValidationService from "../validation-service/crud-validation-service.js";
+import Employee from "../../model/employeeModel.js";
+import CrudValidationService from "../validation-service/crudValidationService.js";
 
 class EmployeeService {
   async createEmployee(data) {

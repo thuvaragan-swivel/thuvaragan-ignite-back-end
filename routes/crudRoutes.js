@@ -1,5 +1,5 @@
 import express from "express";
-import EmployeeController from "../crud-operations-controller/employee-controller.js";
+import EmployeeController from "../crud-operations-controller/employeeController.js";
 
 const expressRouter = express.Router();
 

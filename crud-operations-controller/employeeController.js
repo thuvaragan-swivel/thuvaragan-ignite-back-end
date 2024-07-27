@@ -1,4 +1,4 @@
-import EmployeeService from "../services/employee-service/employee-service.js"
+import EmployeeService from "../services/employee-service/employeeService.js"
 
 class EmployeeController {
   async createEmployee(req, res) {

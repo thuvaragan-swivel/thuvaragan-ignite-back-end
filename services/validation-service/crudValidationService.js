@@ -1,5 +1,5 @@
-import Employee from "../../model/employee-model.js";
-import EmployeeValidationService from "./employee-validation-service.js";
+import Employee from "../../model/employeeModel.js";
+import EmployeeValidationService from "./employeeValidationService.js";
 
 class CrudValidationService {
   static async validateAndCheckExistingEmployee(data, id = null) {

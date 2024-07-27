@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "serve": "node express-server.js",
-    "start": "nodemon express-server.js"
+    "serve": "node expressServer.js",
+    "start": "nodemon expressServer.js"
   },
   "keywords": [],
   "author": "",
