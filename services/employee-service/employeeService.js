@@ -98,7 +98,7 @@ class EmployeeService {
 
     return {
       status: 200,
-      message: "The Employee has been Updated Successfully.",
+      message: "The Employee Data has been Successfully Updated.",
       data: updatedEmployeeData,
     };
   }
