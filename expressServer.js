@@ -27,4 +27,4 @@ const startExpressServer = async () => {
   }
 };
 
-startExpressServer();
+export default startExpressServer();
