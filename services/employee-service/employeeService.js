@@ -71,8 +71,11 @@ class EmployeeService {
   async updateEmployee(employeeId, data) {
     const employeeExists = await CrudValidationService.findEmployeeById(employeeId);
 
-    if (employeeExists.status) {
-      return employeeExists;
+    if (!employeeExists) {
+      return {
+        status: 404,
+        message: `The Employee with the ID: ${employeeId} is not Found in the System!`,
+      };
     }
 
     const validationResult = await CrudValidationService.validateAndCheckExistingEmployee(data, employeeExists._id);
@@ -106,8 +109,11 @@ class EmployeeService {
   async deleteEmployee(employeeId) {
     const employeeExists = await CrudValidationService.findEmployeeById(employeeId);
 
-    if (employeeExists.status) {
-      return employeeExists;
+    if (!employeeExists) {
+      return {
+        status: 404,
+        message: `The Employee with the ID: ${employeeId} is not Found in the System!`,
+      };
     }
 
     await Employee.findOneAndDelete({ employeeId });

@@ -7,6 +7,14 @@ class CrudValidationService {
     const { emailAddress, employeeId } = data;
     const errors = validationErrors || {};
 
+    // Only proceed with the database checks if there are no validation errors
+    if (Object.keys(errors).length > 0) {
+      return {
+        status: 400,
+        message: errors,
+      };
+    }
+
     // Checking for existing email address.
     const emailAddressExist = await Employee.findOne({
       emailAddress,
@@ -46,5 +54,6 @@ class CrudValidationService {
     return employeeExists;
   }
 }
+
 
 export default CrudValidationService;

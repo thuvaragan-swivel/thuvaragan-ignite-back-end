@@ -1,8 +1,14 @@
-// jest.config.cjs
+// // jest.config.cjs
+// module.exports = {
+//   transform: {
+//     '^.+\\.js$': 'babel-jest',
+//   },
+//   testEnvironment: 'node',
+//   transformIgnorePatterns: ['<rootDir>/node_modules/'],
+// };
+
+
 module.exports = {
-  transform: {
-    '^.+\\.js$': 'babel-jest',
-  },
   testEnvironment: 'node',
-  transformIgnorePatterns: ['<rootDir>/node_modules/'],
+  setupFiles: ['./jest.setup.js'],
 };
