@@ -208,25 +208,54 @@ describe("EmployeeService Tests", () => {
         employeeId: 1,
       };
 
-      CrudValidationService.findEmployeeById.mockResolvedValue(employee);
-      Employee.findOneAndDelete.mockResolvedValue(employee);
+      CrudValidationService.findEmployeeById = jest
+        .fn()
+        .mockResolvedValue(employee);
+      Employee.findOne = jest.fn().mockResolvedValue(employee);
+      Employee.findOneAndDelete = jest.fn().mockResolvedValue(employee);
 
       const result = await EmployeeService.deleteEmployee(1);
 
       expect(result.status).toBe(200);
       expect(result.message).toBe(
-        "The Employee with ID: 1 is Deleted Successfully."
+        "The Employee named Jonathan Davidson is Successfully Deleted from the System."
       );
     });
 
-    it("should return 404 if employee not found", async () => {
-      CrudValidationService.findEmployeeById.mockResolvedValue(null);
+    it("should return 404 if employee not found in validation", async () => {
+      CrudValidationService.findEmployeeById = jest
+        .fn()
+        .mockResolvedValue(null);
 
       const result = await EmployeeService.deleteEmployee(99);
 
       expect(result.status).toBe(404);
       expect(result.message).toBe(
         "The Employee with the ID: 99 is not Found in the System!"
+      );
+    });
+
+    it("should return 404 if employee not found in database", async () => {
+      const employeeExists = {
+        _id: "12345",
+        firstName: "Jonathan",
+        lastName: "Davidson",
+        emailAddress: "jon.dav@gmail.com",
+        phoneNumber: "+94771234567",
+        gender: "Male",
+        employeeId: 1,
+      };
+
+      CrudValidationService.findEmployeeById = jest
+        .fn()
+        .mockResolvedValue(employeeExists);
+      Employee.findOne = jest.fn().mockResolvedValue(null);
+
+      const result = await EmployeeService.deleteEmployee(1);
+
+      expect(result.status).toBe(404);
+      expect(result.message).toBe(
+        "The Employee with the ID: 1 is not Found in the System!"
       );
     });
   });

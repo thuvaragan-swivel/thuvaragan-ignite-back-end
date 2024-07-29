@@ -147,11 +147,19 @@ class EmployeeService {
       };
     }
 
+    const employee = await Employee.findOne({ employeeId });
+    if (!employee) {
+      return {
+        status: 404,
+        message: `The Employee with the ID: ${employeeId} is not Found in the System!`,
+      };
+    }
+
     await Employee.findOneAndDelete({ employeeId }); // Deleting the employee from the database.
 
     return {
       status: 200,
-      message: `The Employee with ID: ${employeeId} is Deleted Successfully.`,
+      message: `The Employee named ${employee.firstName} ${employee.lastName} is Successfully Deleted from the System.`,
     };
   }
 }
