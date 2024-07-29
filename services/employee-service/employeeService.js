@@ -67,7 +67,6 @@ class EmployeeService {
       totalCount,
     };
 
-    console.log("Backend response :", response);
     return response;
   }
 
