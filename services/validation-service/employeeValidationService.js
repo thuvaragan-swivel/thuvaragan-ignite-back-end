@@ -36,7 +36,10 @@ class EmployeeValidationService {
         "Phone Number must be a Valid Sri Lankan Phone Number!"
       ),
 
-    gender: yup.string().required("Gender is Required!"),
+    gender: yup
+      .string()
+      .required("Gender is Required!")
+      .oneOf(["Male", "Female"], "Gender must be either 'Male' or 'Female'!"),
 
     employeeId: yup
       .number()
