@@ -2,21 +2,25 @@ import Employee from "../../model/employeeModel.js";
 import CrudValidationService from "../validation-service/crudValidationService.js";
 
 class EmployeeService {
+  // Method to create a new employee.
   async createEmployee(data) {
     const validationResult =
-      await CrudValidationService.validateAndCheckExistingEmployee(data);
+      await CrudValidationService.validateAndCheckExistingEmployee(data); // Validating and checking if employee already exists.
     if (validationResult) {
+      // If validation fails, returning the error response.
       return {
         status: validationResult.status,
         message: validationResult.message,
       };
     }
 
+    // Processing with creating a new employee.
     const newEmployee = new Employee(data);
     const savedEmployeeData = await newEmployee.save();
     return { status: 201, data: savedEmployeeData };
   }
 
+  // Method to get all employees with pagination, sort, and search functionalities.
   async getAllEmployees({
     search,
     sort = "asc",
@@ -26,6 +30,8 @@ class EmployeeService {
   }) {
     const query = {};
 
+    // If search term is provided, building the search query.
+    // Search by first name, last name, and email only.
     if (search) {
       const searchNumber = parseInt(search, 10);
       if (!isNaN(searchNumber)) {
@@ -39,8 +45,9 @@ class EmployeeService {
       }
     }
 
-    const sortOrder = sort === "desc" ? -1 : 1;
+    const sortOrder = sort === "desc" ? -1 : 1; // Determining the sort order.
 
+    // Defining sorting criteria based on sortBy parameter.
     const sortCriteria = {};
     if (sortBy === "createdAt") {
       sortCriteria.createdAt = sortOrder;
@@ -48,11 +55,13 @@ class EmployeeService {
       sortCriteria.firstName = sortOrder;
     }
 
+    // Fetching all employees with pagination, sorting, and search applied.
     const employees = await Employee.find(query)
       .sort(sortCriteria)
       .skip((page - 1) * limit)
       .limit(parseInt(limit));
 
+    // Getting total count of employees for pagination.
     const totalCount = await Employee.countDocuments(query);
     const totalPages = Math.ceil(totalCount / limit);
 
@@ -70,15 +79,18 @@ class EmployeeService {
     return response;
   }
 
+  // Method to get an employee by ID.
   async getEmployeeById(employeeId) {
     return await CrudValidationService.findEmployeeById(employeeId);
   }
 
+  // Method to update an existing employee's data.
   async updateEmployee(employeeId, data) {
     const employeeExists = await CrudValidationService.findEmployeeById(
       employeeId
     );
 
+    // Return error if employee does not exist in the system.
     if (!employeeExists) {
       return {
         status: 404,
@@ -86,6 +98,7 @@ class EmployeeService {
       };
     }
 
+    // Validating the data and checking for existing conflicts.
     const validationResult =
       await CrudValidationService.validateAndCheckExistingEmployee(
         data,
@@ -98,12 +111,14 @@ class EmployeeService {
       };
     }
 
+    // Updating the employee data.
     const updatedEmployeeData = await Employee.findOneAndUpdate(
       { employeeId },
       data,
       { new: true }
     );
 
+    // Returning error message if update failed.
     if (!updatedEmployeeData) {
       return {
         status: 500,
@@ -111,6 +126,7 @@ class EmployeeService {
       };
     }
 
+    // Returning success response with updated employee data.
     return {
       status: 200,
       message: "The Employee Data has been Successfully Updated.",
@@ -118,6 +134,7 @@ class EmployeeService {
     };
   }
 
+  // Method to delete an employee by ID.
   async deleteEmployee(employeeId) {
     const employeeExists = await CrudValidationService.findEmployeeById(
       employeeId
@@ -130,7 +147,7 @@ class EmployeeService {
       };
     }
 
-    await Employee.findOneAndDelete({ employeeId });
+    await Employee.findOneAndDelete({ employeeId }); // Deleting the employee from the database.
 
     return {
       status: 200,
@@ -139,4 +156,5 @@ class EmployeeService {
   }
 }
 
+// Exporting an instance of the EmployeeService class.
 export default new EmployeeService();

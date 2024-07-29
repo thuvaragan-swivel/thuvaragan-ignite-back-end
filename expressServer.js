@@ -8,17 +8,20 @@ import expressRouter from "./routes/crudRoutes.js";
 
 dotenv.config();
 
-const expressApp = express();
-const PORT = process.env.SERVER_PORT;
+const expressApp = express(); // Creating an instance of Express application.
+const PORT = process.env.SERVER_PORT; // Getting the server port.
 
-expressApp.use(cors());
-expressApp.use(bodyParser.json());
-expressApp.use("/api", expressRouter);
+// Middleware configuration.
+expressApp.use(cors()); // Enabling CORS for all routes.
+expressApp.use(bodyParser.json()); // Parsing JSON bodies for incoming requests.
+expressApp.use("/api", expressRouter); // Using the routes defined in the crudRoutes.js file.
 
+// Function to start the Express server.
+// It connects to the MongoDB database and then starts the server.
 const startExpressServer = async () => {
   try {
     logger.info(`Starting Express Server on Port ${PORT}.`);
-    await connectDB();
+    await connectDB(); // Connecting to the MongoDB database.
     expressApp.listen(PORT, () => {
       logger.info(`Express Server is running on Port ${PORT}.\n`);
     });
@@ -27,4 +30,5 @@ const startExpressServer = async () => {
   }
 };
 
+// Exporting the function to start the server.
 export default startExpressServer();

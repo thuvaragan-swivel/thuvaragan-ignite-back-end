@@ -1,7 +1,9 @@
 import * as yup from "yup";
 
 // This is for the Employee Data Validation.
+// Handling validation using Yup.
 class EmployeeValidationService {
+  // Defining the Yup schema for employee data validation.
   static employeeValidationSchema = yup.object({
     firstName: yup
       .string()
@@ -46,19 +48,22 @@ class EmployeeValidationService {
 
   static async validate(data) {
     try {
-      await this.employeeValidationSchema.validate(data, { abortEarly: false });
+      // Validating the data against the schema;
+      await this.employeeValidationSchema.validate(data, { abortEarly: false }); // { abortEarly: false } basically collects all errors.
       return null;
     } catch (error) {
+      // Handling validation errors.
       if (error.name === "ValidationError") {
+        // Converting validation errors to a more readable format.
         const errors = error.inner.reduce((acc, curr) => {
           if (!acc[curr.path]) {
             acc[curr.path] = curr.message;
           }
           return acc;
         }, {});
-        return errors;
+        return errors; // Returning the formatted errors.
       }
-      throw error;
+      throw error; // Throwing error if it's not a validation error.
     }
   }
 }
