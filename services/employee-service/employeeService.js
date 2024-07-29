@@ -17,7 +17,11 @@ class EmployeeService {
     // Processing with creating a new employee.
     const newEmployee = new Employee(data);
     const savedEmployeeData = await newEmployee.save();
-    return { status: 201, data: savedEmployeeData };
+    return {
+      status: 201,
+      message: `A New Employee named ${savedEmployeeData.firstName} ${savedEmployeeData.lastName} has been Successfully Added to the System.`,
+      data: savedEmployeeData,
+    };
   }
 
   // Method to get all employees with pagination, sort, and search functionalities.

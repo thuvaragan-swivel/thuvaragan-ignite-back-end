@@ -25,9 +25,9 @@ describe("EmployeeService Tests", () => {
       };
       const savedEmployee = { ...data, _id: "12345" };
 
-      CrudValidationService.validateAndCheckExistingEmployee.mockResolvedValue(
-        null
-      );
+      CrudValidationService.validateAndCheckExistingEmployee = jest
+        .fn()
+        .mockResolvedValue(null);
       Employee.mockImplementation(() => ({
         save: jest.fn().mockResolvedValue(savedEmployee),
       }));
@@ -35,6 +35,9 @@ describe("EmployeeService Tests", () => {
       const result = await EmployeeService.createEmployee(data);
 
       expect(result.status).toBe(201);
+      expect(result.message).toBe(
+        "A New Employee named Jonathan Davidson has been Successfully Added to the System."
+      );
       expect(result.data).toMatchObject(savedEmployee);
     });
 
@@ -42,9 +45,9 @@ describe("EmployeeService Tests", () => {
       const data = { firstName: "Jonathan", lastName: "Davidson" };
       const validationError = { status: 400, message: "Validation Error" };
 
-      CrudValidationService.validateAndCheckExistingEmployee.mockResolvedValue(
-        validationError
-      );
+      CrudValidationService.validateAndCheckExistingEmployee = jest
+        .fn()
+        .mockResolvedValue(validationError);
 
       const result = await EmployeeService.createEmployee(data);
 
