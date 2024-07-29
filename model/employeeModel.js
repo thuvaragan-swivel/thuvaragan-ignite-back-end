@@ -31,7 +31,7 @@ const employeeSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // This will add createdAt and updatedAt fields.
+    timestamps: true,
   }
 );
 

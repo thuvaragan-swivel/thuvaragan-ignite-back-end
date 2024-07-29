@@ -1,4 +1,4 @@
-import EmployeeService from "../services/employee-service/employeeService.js"
+import EmployeeService from "../services/employee-service/employeeService.js";
 
 class EmployeeController {
   async createEmployee(req, res) {
@@ -10,10 +10,15 @@ class EmployeeController {
     }
   }
 
-
   async getAllEmployees(req, res) {
     try {
-      const { search, sort = "asc", page = 1, limit = 12, sortBy = "firstName" } = req.query;
+      const {
+        search,
+        sort = "asc",
+        page = 1,
+        limit = 12,
+        sortBy = "firstName",
+      } = req.query;
       const result = await EmployeeService.getAllEmployees({
         search,
         sort,
@@ -53,8 +58,6 @@ class EmployeeController {
     }
   }
 
-
-  
   async deleteEmployee(req, res) {
     try {
       const employeeId = parseInt(req.params.id, 10);

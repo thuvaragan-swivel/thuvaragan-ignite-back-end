@@ -1,18 +1,20 @@
+// crudRoutes.test.js
+
 import request from 'supertest';
 import express from 'express';
 import expressRouter from '../routes/crudRoutes.js';
 import EmployeeController from '../crud-operations-controller/employeeController.js';
 
-// Create an express app and use the router
+// Creating an express app and using the router.
 const app = express();
-app.use(express.json()); // Middleware to parse JSON request bodies
+app.use(express.json()); // Middleware to parse JSON request bodies.
 app.use('/api', expressRouter);
 
-// Mock the EmployeeController methods
+// Mocking the EmployeeController methods.
 jest.mock('../crud-operations-controller/employeeController.js', () => ({
     createEmployee: jest.fn((req, res) => res.status(201).send({ message: 'Employee created' })),
-    getAllEmployees: jest.fn((req, res) => res.status(200).send([{ id: 1, name: 'John Doe' }])),
-    getEmployeeById: jest.fn((req, res) => res.status(200).send({ id: req.params.id, name: 'John Doe' })),
+    getAllEmployees: jest.fn((req, res) => res.status(200).send([{ id: 1, firstName: 'Jonathan', lastName: 'Davidson' }])),
+    getEmployeeById: jest.fn((req, res) => res.status(200).send({ id: req.params.id, firstName: 'Jonathan', lastName: 'Davidson' })),
     updateEmployee: jest.fn((req, res) => res.status(200).send({ message: 'Employee updated' })),
     deleteEmployee: jest.fn((req, res) => res.status(200).send({ message: 'Employee deleted' })),
 }));
@@ -21,7 +23,7 @@ describe('CRUD Routes', () => {
     test('POST /api/employee should create an employee', async () => {
         const res = await request(app)
             .post('/api/employee')
-            .send({ name: 'Jane Doe', email: 'jane.doe@example.com' });
+            .send({ firstName: 'Jonathan', lastName: 'Davidson', email: 'jon.dav@gmail.com' });
 
         expect(res.statusCode).toEqual(201);
         expect(res.body).toHaveProperty('message', 'Employee created');
@@ -31,7 +33,7 @@ describe('CRUD Routes', () => {
         const res = await request(app).get('/api/employee');
 
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toEqual([{ id: 1, name: 'John Doe' }]);
+        expect(res.body).toEqual([{ id: 1, firstName: 'Jonathan', lastName: 'Davidson' }]);
     });
 
     test('GET /api/employee/:id should return an employee by id', async () => {
@@ -39,13 +41,14 @@ describe('CRUD Routes', () => {
 
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('id', '1');
-        expect(res.body).toHaveProperty('name', 'John Doe');
+        expect(res.body).toHaveProperty('firstName', 'Jonathan');
+        expect(res.body).toHaveProperty('lastName', 'Davidson');
     });
 
     test('PUT /api/employee/:id should update an employee by id', async () => {
         const res = await request(app)
             .put('/api/employee/1')
-            .send({ name: 'Jane Doe', email: 'jane.doe@example.com' });
+            .send({ firstName: 'Jonathan', lastName: 'Davidson', email: 'jon.david@gmail.com' });
 
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('message', 'Employee updated');

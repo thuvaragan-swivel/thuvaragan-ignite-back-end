@@ -7,7 +7,6 @@ class CrudValidationService {
     const { emailAddress, employeeId } = data;
     const errors = validationErrors || {};
 
-    // Only proceed with the database checks if there are no validation errors
     if (Object.keys(errors).length > 0) {
       return {
         status: 400,
@@ -15,19 +14,17 @@ class CrudValidationService {
       };
     }
 
-    // Checking for existing email address.
     const emailAddressExist = await Employee.findOne({
       emailAddress,
-      ...(id && { _id: { $ne: id } }), // Exclude current employee if updating...
+      ...(id && { _id: { $ne: id } }),
     });
     if (emailAddressExist) {
       errors.emailAddress = `An Employee already exists with the Email ID: ${emailAddress} !`;
     }
 
-    // Checking for existing employee ID.
     const employeeIdExist = await Employee.findOne({
       employeeId,
-      ...(id && { _id: { $ne: id } }), // Exclude current employee if updating...
+      ...(id && { _id: { $ne: id } }),
     });
     if (employeeIdExist) {
       errors.employeeId = `An Employee already exists with the Employee ID: ${employeeId} !`;
@@ -40,7 +37,7 @@ class CrudValidationService {
       };
     }
 
-    return null; // No errors.
+    return null;
   }
 
   static async findEmployeeById(employeeId) {
@@ -54,6 +51,5 @@ class CrudValidationService {
     return employeeExists;
   }
 }
-
 
 export default CrudValidationService;

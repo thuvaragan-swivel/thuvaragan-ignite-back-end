@@ -50,7 +50,6 @@ class EmployeeValidationService {
       return null;
     } catch (error) {
       if (error.name === "ValidationError") {
-        // Ensure that required errors are shown first
         const errors = error.inner.reduce((acc, curr) => {
           if (!acc[curr.path]) {
             acc[curr.path] = curr.message;

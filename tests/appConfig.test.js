@@ -1,20 +1,20 @@
-// config.test.js
+// appConfig.test.js
 
-describe('Configuration Tests', () => {
+describe("Configuration Tests", () => {
   beforeAll(() => {
-    // Mock the environment variables
-    process.env.SERVER_PORT = '8000';
+    // Mocking the server port.
+    process.env.SERVER_PORT = "8000";
   });
 
   afterAll(() => {
-    // Restore the environment variables to their original state
+    // Restoring the env var to its original state.
     delete process.env.SERVER_PORT;
   });
 
-  test('should read port from environment variables', () => {
-    // Reset the module registry before requiring the configuration module
+  test("should read port from environment variables", () => {
+    // Reset the module registry before requiring the configuration module.
     jest.resetModules();
-    const config = require('../config/appConfig');
-    expect(config.appConfig.port).toBe('8000');
+    const config = require("../config/appConfig");
+    expect(config.appConfig.port).toBe("8000");
   });
 });

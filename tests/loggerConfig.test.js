@@ -1,3 +1,5 @@
+// loggerConfig.test.js
+
 process.env.LOG_FILE = 'test.log';
 
 import logger from '../config/loggerConfig';

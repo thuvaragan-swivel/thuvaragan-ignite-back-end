@@ -3,7 +3,8 @@ import CrudValidationService from "../validation-service/crudValidationService.j
 
 class EmployeeService {
   async createEmployee(data) {
-    const validationResult = await CrudValidationService.validateAndCheckExistingEmployee(data);
+    const validationResult =
+      await CrudValidationService.validateAndCheckExistingEmployee(data);
     if (validationResult) {
       return {
         status: validationResult.status,
@@ -16,9 +17,15 @@ class EmployeeService {
     return { status: 201, data: savedEmployeeData };
   }
 
-  async getAllEmployees({ search, sort = "asc", page = 1, limit = 12, sortBy = 'firstName' }) {
+  async getAllEmployees({
+    search,
+    sort = "asc",
+    page = 1,
+    limit = 12,
+    sortBy = "firstName",
+  }) {
     const query = {};
-  
+
     if (search) {
       const searchNumber = parseInt(search, 10);
       if (!isNaN(searchNumber)) {
@@ -31,24 +38,24 @@ class EmployeeService {
         ];
       }
     }
-  
+
     const sortOrder = sort === "desc" ? -1 : 1;
-  
+
     const sortCriteria = {};
-    if (sortBy === 'createdAt') {
+    if (sortBy === "createdAt") {
       sortCriteria.createdAt = sortOrder;
     } else {
       sortCriteria.firstName = sortOrder;
     }
-  
+
     const employees = await Employee.find(query)
       .sort(sortCriteria)
       .skip((page - 1) * limit)
       .limit(parseInt(limit));
-  
+
     const totalCount = await Employee.countDocuments(query);
     const totalPages = Math.ceil(totalCount / limit);
-  
+
     const response = {
       status: 200,
       data: employees,
@@ -57,10 +64,10 @@ class EmployeeService {
         pageSize: parseInt(limit),
         totalPages,
       },
-      totalCount // Total number of employees in the database
+      totalCount,
     };
-  
-    console.log("Backend response :", response); // Add this line for debugging
+
+    console.log("Backend response :", response);
     return response;
   }
 
@@ -69,7 +76,9 @@ class EmployeeService {
   }
 
   async updateEmployee(employeeId, data) {
-    const employeeExists = await CrudValidationService.findEmployeeById(employeeId);
+    const employeeExists = await CrudValidationService.findEmployeeById(
+      employeeId
+    );
 
     if (!employeeExists) {
       return {
@@ -78,7 +87,11 @@ class EmployeeService {
       };
     }
 
-    const validationResult = await CrudValidationService.validateAndCheckExistingEmployee(data, employeeExists._id);
+    const validationResult =
+      await CrudValidationService.validateAndCheckExistingEmployee(
+        data,
+        employeeExists._id
+      );
     if (validationResult) {
       return {
         status: validationResult.status,
@@ -107,7 +120,9 @@ class EmployeeService {
   }
 
   async deleteEmployee(employeeId) {
-    const employeeExists = await CrudValidationService.findEmployeeById(employeeId);
+    const employeeExists = await CrudValidationService.findEmployeeById(
+      employeeId
+    );
 
     if (!employeeExists) {
       return {

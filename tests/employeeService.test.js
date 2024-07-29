@@ -1,8 +1,10 @@
+// employeeService.test.js
+
 import Employee from "../model/employeeModel.js";
 import CrudValidationService from "../services/validation-service/crudValidationService.js";
 import EmployeeService from "../services/employee-service/employeeService.js";
 
-// Mock the dependencies
+// Mocking the dependencies.
 jest.mock("../model/employeeModel.js");
 jest.mock("../services/validation-service/crudValidationService.js");
 
@@ -14,7 +16,7 @@ describe("EmployeeService Tests", () => {
 
   describe("createEmployee", () => {
     it("should create a new employee", async () => {
-      const data = { firstName: 'John', lastName: 'Doe', emailAddress: 'john.doe@example.com', phoneNumber: '+94771234567', gender: 'Male', employeeId: 1 };
+      const data = { firstName: 'Jonathan', lastName: 'Davidson', emailAddress: 'jon.dav@gmail.com', phoneNumber: '+94771234567', gender: 'Male', employeeId: 1 };
       const savedEmployee = { ...data, _id: '12345' };
 
       CrudValidationService.validateAndCheckExistingEmployee.mockResolvedValue(null);
@@ -29,7 +31,7 @@ describe("EmployeeService Tests", () => {
     });
 
     it("should return validation error", async () => {
-      const data = { firstName: 'John', lastName: 'Doe' };
+      const data = { firstName: 'Jonathan', lastName: 'Davidson' };
       const validationError = { status: 400, message: "Validation Error" };
 
       CrudValidationService.validateAndCheckExistingEmployee.mockResolvedValue(validationError);
@@ -44,10 +46,10 @@ describe("EmployeeService Tests", () => {
   describe("getAllEmployees", () => {
     it("should get all employees with pagination", async () => {
       const employees = [
-        { firstName: 'John', lastName: 'Doe', emailAddress: 'john.doe@example.com', phoneNumber: '+94771234567', gender: 'Male', employeeId: 1 },
-        { firstName: 'Jane', lastName: 'Doe', emailAddress: 'jane.doe@example.com', phoneNumber: '+9477654321', gender: 'Female', employeeId: 2 }
+        { firstName: 'Jonathan', lastName: 'Davidson', emailAddress: 'jon.dav@gmail.com', phoneNumber: '+94771234567', gender: 'Male', employeeId: 1 },
+        { firstName: 'Janace', lastName: 'Davidson', emailAddress: 'jan.dav@example.com', phoneNumber: '+9477654321', gender: 'Female', employeeId: 2 }
       ];
-      const query = { $or: [{ firstName: { $regex: 'Doe', $options: "i" } }] };
+      const query = { $or: [{ firstName: { $regex: 'Davidson', $options: "i" } }] };
 
       Employee.find.mockReturnValue({
         sort: jest.fn().mockReturnThis(),
@@ -56,7 +58,7 @@ describe("EmployeeService Tests", () => {
       });
       Employee.countDocuments.mockResolvedValue(2);
 
-      const result = await EmployeeService.getAllEmployees({ search: 'Doe', sort: 'asc', page: 1, limit: 10, sortBy: 'firstName' });
+      const result = await EmployeeService.getAllEmployees({ search: 'Davidson', sort: 'asc', page: 1, limit: 10, sortBy: 'firstName' });
 
       expect(result.status).toBe(200);
       expect(result.data).toHaveLength(2);
@@ -68,7 +70,7 @@ describe("EmployeeService Tests", () => {
 
   describe("getEmployeeById", () => {
     it("should get employee by ID", async () => {
-      const employee = { firstName: 'John', lastName: 'Doe', emailAddress: 'john.doe@example.com', phoneNumber: '+94771234567', gender: 'Male', employeeId: 1 };
+      const employee = { firstName: 'Jonathan', lastName: 'Davidson', emailAddress: 'jon.dav@gmail.com', phoneNumber: '+94771234567', gender: 'Male', employeeId: 1 };
 
       CrudValidationService.findEmployeeById.mockResolvedValue(employee);
 
@@ -88,7 +90,7 @@ describe("EmployeeService Tests", () => {
 
   describe("updateEmployee", () => {
     it("should update employee data", async () => {
-      const employee = { _id: '12345', firstName: 'John', lastName: 'Doe', emailAddress: 'john.doe@example.com', phoneNumber: '+94771234567', gender: 'Male', employeeId: 1 };
+      const employee = { _id: '12345', firstName: 'Jonathan', lastName: 'Davidson', emailAddress: 'jon.dav@gmail.com', phoneNumber: '+94771234567', gender: 'Male', employeeId: 1 };
       const updatedEmployee = { ...employee, lastName: 'Smith' };
 
       CrudValidationService.findEmployeeById.mockResolvedValue(employee);
@@ -112,7 +114,7 @@ describe("EmployeeService Tests", () => {
     });
 
     it("should return validation error", async () => {
-      const employee = { _id: '12345', firstName: 'John', lastName: 'Doe', emailAddress: 'john.doe@example.com', phoneNumber: '+94771234567', gender: 'Male', employeeId: 1 };
+      const employee = { _id: '12345', firstName: 'Jonathan', lastName: 'Davidson', emailAddress: 'jon.dav@gmail.com', phoneNumber: '+94771234567', gender: 'Male', employeeId: 1 };
       const validationError = { status: 400, message: "Validation Error" };
 
       CrudValidationService.findEmployeeById.mockResolvedValue(employee);
@@ -127,7 +129,7 @@ describe("EmployeeService Tests", () => {
 
   describe("deleteEmployee", () => {
     it("should delete employee by ID", async () => {
-      const employee = { _id: '12345', firstName: 'John', lastName: 'Doe', emailAddress: 'john.doe@example.com', phoneNumber: '+94771234567', gender: 'Male', employeeId: 1 };
+      const employee = { _id: '12345', firstName: 'Jonathan', lastName: 'Davidson', emailAddress: 'jon.dav@gmail.com', phoneNumber: '+94771234567', gender: 'Male', employeeId: 1 };
 
       CrudValidationService.findEmployeeById.mockResolvedValue(employee);
       Employee.findOneAndDelete.mockResolvedValue(employee);

@@ -1,7 +1,9 @@
-import EmployeeController from '../crud-operations-controller/employeeController.js'; // Adjust the path
-import EmployeeService from '../services/employee-service/employeeService.js'; // Adjust the path
+// employeeController.test.js
 
-// Mock EmployeeService methods
+import EmployeeController from '../crud-operations-controller/employeeController.js';
+import EmployeeService from '../services/employee-service/employeeService.js';
+
+// Mocking EmployeeService methods.
 jest.mock('../services/employee-service/employeeService.js');
 
 describe('EmployeeController', () => {
@@ -17,7 +19,7 @@ describe('EmployeeController', () => {
 
   describe('createEmployee', () => {
     it('should create an employee and return the result', async () => {
-      req.body = { firstName: 'John', lastName: 'Doe' };
+      req.body = { firstName: 'Jonathan', lastName: 'Davidson', emailAddress: 'jon.dav@gmail.com' };
       EmployeeService.createEmployee.mockResolvedValue({ status: 201, message: 'Employee created' });
 
       await EmployeeController.createEmployee(req, res);
@@ -28,7 +30,7 @@ describe('EmployeeController', () => {
     });
 
     it('should handle errors', async () => {
-      req.body = { firstName: 'John', lastName: 'Doe' };
+      req.body = { firstName: 'Jonathan', lastName: 'Davidson', emailAddress: 'jon.dav@gmail.com' };
       EmployeeService.createEmployee.mockRejectedValue(new Error('Error creating employee'));
 
       await EmployeeController.createEmployee(req, res);
@@ -40,7 +42,7 @@ describe('EmployeeController', () => {
 
   describe('getAllEmployees', () => {
     it('should return all employees with query params', async () => {
-      req.query = { search: 'Doe', sort: 'asc', page: 1, limit: 10, sortBy: 'firstName' };
+      req.query = { search: 'Davidson', sort: 'asc', page: 1, limit: 10, sortBy: 'firstName' };
       EmployeeService.getAllEmployees.mockResolvedValue({ status: 200, data: [] });
 
       await EmployeeController.getAllEmployees(req, res);
@@ -51,7 +53,7 @@ describe('EmployeeController', () => {
     });
 
     it('should handle errors', async () => {
-      req.query = { search: 'Doe' };
+      req.query = { search: 'Davidson' };
       EmployeeService.getAllEmployees.mockRejectedValue(new Error('Error retrieving employees'));
 
       await EmployeeController.getAllEmployees(req, res);
@@ -87,7 +89,7 @@ describe('EmployeeController', () => {
   describe('updateEmployee', () => {
     it('should update an employee and return the result', async () => {
       req.params = { id: '1' };
-      req.body = { firstName: 'Jane', lastName: 'Doe' };
+      req.body = { firstName: 'Jonathan', lastName: 'Davidson', emailAddress: 'jon.david@gmail.com' };
       EmployeeService.updateEmployee.mockResolvedValue({ status: 200, message: 'Employee updated' });
 
       await EmployeeController.updateEmployee(req, res);
@@ -99,7 +101,7 @@ describe('EmployeeController', () => {
 
     it('should handle errors', async () => {
       req.params = { id: '1' };
-      req.body = { firstName: 'Jane', lastName: 'Doe' };
+      req.body = { firstName: 'Jonathan', lastName: 'Davidson', emailAddress: 'jon.david@gmail.com' };
       EmployeeService.updateEmployee.mockRejectedValue(new Error('Error updating employee'));
 
       await EmployeeController.updateEmployee(req, res);
