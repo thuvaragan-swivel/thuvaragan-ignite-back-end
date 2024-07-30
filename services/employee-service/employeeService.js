@@ -94,12 +94,9 @@ class EmployeeService {
       employeeId
     );
 
-    // Return error if employee does not exist in the system.
-    if (!employeeExists) {
-      return {
-        status: 404,
-        message: `The Employee with the ID: ${employeeId} is not Found in the System!`,
-      };
+    // Checking and returning error if employee does not exist in the system.
+    if (employeeExists.status === 404) {
+      return employeeExists; // Return the 404 error object.
     }
 
     // Validating the data and checking for existing conflicts.
@@ -144,26 +141,14 @@ class EmployeeService {
       employeeId
     );
 
-    if (!employeeExists) {
-      return {
-        status: 404,
-        message: `The Employee with the ID: ${employeeId} is not Found in the System!`,
-      };
+    if (employeeExists.status === 404) {
+      return employeeExists;
     }
-
-    const employee = await Employee.findOne({ employeeId });
-    if (!employee) {
-      return {
-        status: 404,
-        message: `The Employee with the ID: ${employeeId} is not Found in the System!`,
-      };
-    }
-
     await Employee.findOneAndDelete({ employeeId }); // Deleting the employee from the database.
 
     return {
       status: 200,
-      message: `The Employee named ${employee.firstName} ${employee.lastName} is Successfully Deleted from the System.`,
+      message: `The Employee named ${employeeExists.firstName} ${employeeExists.lastName} is Successfully Deleted from the System.`,
     };
   }
 }
