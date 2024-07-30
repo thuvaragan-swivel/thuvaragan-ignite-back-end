@@ -7,8 +7,8 @@ const expressRouter = express.Router();
 /**
  * @swagger
  * tags:
- *   name: Employee
- *   description: Operations related to Employees
+ *   name: Employee Management System
+ *   description: CRUD Operations related to Employee Management
  */
 
 /**

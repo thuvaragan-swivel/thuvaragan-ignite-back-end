@@ -8,7 +8,7 @@ const swaggerOptions = {
     info: {
       title: 'Swagger Express API',
       version: '1.0.0',
-      description: 'A simple Express API with Swagger documentation.',
+      description: 'A Simple Express API with Swagger Documentation.',
     },
   },
   apis: ['./routes/crudRoutes.js'], // Path to your API routes
