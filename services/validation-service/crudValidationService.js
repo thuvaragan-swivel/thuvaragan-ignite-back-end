@@ -22,7 +22,7 @@ class CrudValidationService {
       ...(id && { _id: { $ne: id } }), // Excluding the current employee ID if updating.
     });
     if (emailAddressExist) {
-      errors.emailAddress = `An Employee already exists with the Email ID: ${emailAddress} !`;
+      errors.emailAddress = `An Employee already exists with the Email Address: ${emailAddress} !`;
     }
 
     // Checking if an employee with the same employee ID already exists.

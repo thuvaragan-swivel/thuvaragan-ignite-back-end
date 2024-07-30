@@ -16,7 +16,7 @@ const expressRouter = express.Router();
  * /api/employee:
  *   post:
  *     summary: Create a New Employee
- *     tags: [Employee]
+ *     tags: [Employee Management System]
  *     requestBody:
  *       required: true
  *       content:
@@ -58,7 +58,7 @@ expressRouter.post("/employee", EmployeeController.createEmployee); // Route to 
  * /api/employee:
  *   get:
  *     summary: Retrieve All Employees
- *     tags: [Employee]
+ *     tags: [Employee Management System]
  *     responses:
  *       200:
  *         description: List of Employees
@@ -93,7 +93,7 @@ expressRouter.get("/employee", EmployeeController.getAllEmployees); // Route to 
  * /api/employee/{id}:
  *   get:
  *     summary: Retrieve a Specific Employee by ID
- *     tags: [Employee]
+ *     tags: [Employee Management System]
  *     parameters:
  *       - name: id
  *         in: path
@@ -135,7 +135,7 @@ expressRouter.get("/employee/:id", EmployeeController.getEmployeeById); // Route
  * /api/employee/{id}:
  *   put:
  *     summary: Update an Existing Employee by ID
- *     tags: [Employee]
+ *     tags: [Employee Management System]
  *     parameters:
  *       - name: id
  *         in: path
@@ -186,7 +186,7 @@ expressRouter.put("/employee/:id", EmployeeController.updateEmployee); // Route 
  * /api/employee/{id}:
  *   delete:
  *     summary: Delete an Employee by ID
- *     tags: [Employee]
+ *     tags: [Employee Management System]
  *     parameters:
  *       - name: id
  *         in: path
