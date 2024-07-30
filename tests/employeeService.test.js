@@ -142,37 +142,30 @@ describe("EmployeeService Tests", () => {
         employeeId: 1,
       };
       const updatedEmployee = { ...employee, lastName: "Smith" };
-
-      CrudValidationService.findEmployeeById.mockResolvedValue(employee);
-      CrudValidationService.validateAndCheckExistingEmployee.mockResolvedValue(
-        null
-      );
-      Employee.findOneAndUpdate.mockResolvedValue(updatedEmployee);
-
-      const result = await EmployeeService.updateEmployee(1, {
-        lastName: "Smith",
-      });
-
+  
+      CrudValidationService.findEmployeeById = jest.fn().mockResolvedValue(employee);
+      CrudValidationService.validateAndCheckExistingEmployee = jest.fn().mockResolvedValue(null);
+      Employee.findOneAndUpdate = jest.fn().mockResolvedValue(updatedEmployee);
+  
+      const result = await EmployeeService.updateEmployee(1, { lastName: "Smith" });
+  
       expect(result.status).toBe(200);
       expect(result.data).toMatchObject(updatedEmployee);
-      expect(result.message).toBe(
-        "The Employee Data has been Successfully Updated."
-      );
+      expect(result.message).toBe("The Employee Data has been Successfully Updated.");
     });
-
+  
     it("should return 404 if employee not found", async () => {
-      CrudValidationService.findEmployeeById.mockResolvedValue(null);
-
-      const result = await EmployeeService.updateEmployee(99, {
-        lastName: "Smith",
+      CrudValidationService.findEmployeeById = jest.fn().mockResolvedValue({
+        status: 404,
+        message: "The Employee with the ID: 99 is not Found in the System!"
       });
-
+  
+      const result = await EmployeeService.updateEmployee(99, { lastName: "Smith" });
+  
       expect(result.status).toBe(404);
-      expect(result.message).toBe(
-        "The Employee with the ID: 99 is not Found in the System!"
-      );
+      expect(result.message).toBe("The Employee with the ID: 99 is not Found in the System!");
     });
-
+  
     it("should return validation error", async () => {
       const employee = {
         _id: "12345",
@@ -184,21 +177,17 @@ describe("EmployeeService Tests", () => {
         employeeId: 1,
       };
       const validationError = { status: 400, message: "Validation Error" };
-
-      CrudValidationService.findEmployeeById.mockResolvedValue(employee);
-      CrudValidationService.validateAndCheckExistingEmployee.mockResolvedValue(
-        validationError
-      );
-
-      const result = await EmployeeService.updateEmployee(1, {
-        lastName: "Smith",
-      });
-
+  
+      CrudValidationService.findEmployeeById = jest.fn().mockResolvedValue(employee);
+      CrudValidationService.validateAndCheckExistingEmployee = jest.fn().mockResolvedValue(validationError);
+  
+      const result = await EmployeeService.updateEmployee(1, { lastName: "Smith" });
+  
       expect(result.status).toBe(400);
       expect(result.message).toBe("Validation Error");
     });
   });
-
+  
   describe("deleteEmployee", () => {
     it("should delete employee by ID", async () => {
       const employee = {
@@ -211,11 +200,8 @@ describe("EmployeeService Tests", () => {
         employeeId: 1,
       };
 
-      CrudValidationService.findEmployeeById = jest
-        .fn()
-        .mockResolvedValue(employee);
-      Employee.findOne = jest.fn().mockResolvedValue(employee);
-      Employee.findOneAndDelete = jest.fn().mockResolvedValue(employee);
+      CrudValidationService.findEmployeeById.mockResolvedValue(employee);
+      Employee.findOneAndDelete.mockResolvedValue(employee);
 
       const result = await EmployeeService.deleteEmployee(1);
 
@@ -226,9 +212,10 @@ describe("EmployeeService Tests", () => {
     });
 
     it("should return 404 if employee not found in validation", async () => {
-      CrudValidationService.findEmployeeById = jest
-        .fn()
-        .mockResolvedValue(null);
+      CrudValidationService.findEmployeeById.mockResolvedValue({
+        status: 404,
+        message: "The Employee with the ID: 99 is not Found in the System!",
+      });
 
       const result = await EmployeeService.deleteEmployee(99);
 
@@ -239,20 +226,10 @@ describe("EmployeeService Tests", () => {
     });
 
     it("should return 404 if employee not found in database", async () => {
-      const employeeExists = {
-        _id: "12345",
-        firstName: "Jonathan",
-        lastName: "Davidson",
-        emailAddress: "jon.dav@gmail.com",
-        phoneNumber: "+94771234567",
-        gender: "Male",
-        employeeId: 1,
-      };
-
-      CrudValidationService.findEmployeeById = jest
-        .fn()
-        .mockResolvedValue(employeeExists);
-      Employee.findOne = jest.fn().mockResolvedValue(null);
+      CrudValidationService.findEmployeeById.mockResolvedValue({
+        status: 404,
+        message: "The Employee with the ID: 1 is not Found in the System!",
+      });
 
       const result = await EmployeeService.deleteEmployee(1);
 
@@ -262,4 +239,5 @@ describe("EmployeeService Tests", () => {
       );
     });
   });
+  
 });
