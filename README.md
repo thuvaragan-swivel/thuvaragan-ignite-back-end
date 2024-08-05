@@ -50,7 +50,7 @@ The backend provides the following CRUD operations via API calls:
 4. **Update an Employee**: PUT /api/employee/:id
 5. **Delete an Employee**: DELETE /api/employee/:id
 
-Please refer to the Swagger documentation for detailed information on each endpoint.
+Please refer to the Swagger documentation for detailed information on each endpoint.  
 You can access the Swagger server locally at http://localhost:8000/api/docs.
 
 ## Running Tests
