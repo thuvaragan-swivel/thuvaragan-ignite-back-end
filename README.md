@@ -23,37 +23,32 @@ To get started with this project, follow these steps:
     npm install
     ```
 
-4. **Create a `.env` file in the root directory and add the following variables**:
-    ```env
-    SERVER_PORT=3000
-    MONGODB_URL=your_mongodb_url
-    ```
-
 ## Usage
 
 To run the project, use the following command in your terminal:
 
 ```bash
 npm start
+```
 This will start the Express server. You can access the server locally at http://localhost:8000.
 
 ## Technologies Used
 
-- **Node.js**: JavaScript runtime environment
-- **Express.js**: Web framework for Node.js
-- **MongoDB**: NoSQL database
-- **Mongoose**: ODM library for MongoDB
-- **Jest**: Testing framework
+**Node.js**: JavaScript runtime environment
+**Express.js**: Web framework for Node.js
+**MongoDB**: NoSQL database
+**Mongoose**: ODM library for MongoDB
+**Jest**: Testing framework
 
 ## API Documentation
 
 The backend provides the following CRUD operations via API calls:
 
-- **Create an Employee**: `POST /api/employees`
-- **Retrieve All Employees**: `GET /api/employees`
-- **Retrieve a Single Employee**: `GET /api/employees/:id`
-- **Update an Employee**: `PUT /api/employees/:id`
-- **Delete an Employee**: `DELETE /api/employees/:id`
+**Create an Employee**: POST /api/employees
+**Retrieve All Employees**: GET /api/employees
+**Retrieve a Single Employee**: GET /api/employees/:id
+**Update an Employee**: PUT /api/employees/:id
+**Delete an Employee**: DELETE /api/employees/:id
 
 Please refer to the Swagger documentation for detailed information on each endpoint.
 
@@ -63,3 +58,6 @@ To run the tests, execute the following command in your terminal:
 
 ```bash
 npm test
+```
+
+This command will run all the test cases defined in the project.
