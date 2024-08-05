@@ -30,7 +30,7 @@ To run the project, use the following command in your terminal:
 ```bash
 npm start
 ```
-This will start the Express server. You can access the server locally at http://localhost:8000.
+This will start the Express server. You can access the server locally at http://localhost:8000/api/employee.
 
 ## Technologies Used
 
