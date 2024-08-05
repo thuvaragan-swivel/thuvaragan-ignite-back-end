@@ -1,31 +1,8 @@
-import express from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
-import dotenv from "dotenv";
+import expressApp from "./app.js";
 import connectDB from "./config/mongoConfig.js";
 import logger from "./config/loggerConfig.js";
-import expressRouter from "./routes/crudRoutes.js";
-import { swaggerDocs, swaggerUi } from "./swagger/swagger.js";
 
-dotenv.config();
-
-const expressApp = express(); // Creating an instance of Express application.
 const PORT = process.env.SERVER_PORT; // Getting the server port.
-
-// Disable the 'X-Powered-By' header.
-expressApp.disable('x-powered-by');
-
-// Middleware configuration.
-const corsOptions = {
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow only the needed methods.
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowing only the headers needed.
-};
-
-expressApp.use(cors(corsOptions)); // Enabling CORS.
-expressApp.use(bodyParser.json()); // Parsing JSON bodies for incoming requests.
-expressApp.use("/api", expressRouter); // Using the routes defined in the crudRoutes.js file.
-
-expressApp.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Using Swagger for API Documentation.
 
 // Function to start the Express server.
 // It connects to the MongoDB database and then starts the server.
@@ -41,5 +18,4 @@ const startExpressServer = async () => {
   }
 };
 
-// Exporting the function to start the server.
-export default startExpressServer();
+startExpressServer();
