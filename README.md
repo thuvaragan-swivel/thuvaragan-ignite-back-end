@@ -34,21 +34,21 @@ This will start the Express server. You can access the server locally at http://
 
 ## Technologies Used
 
-**Node.js**: JavaScript runtime environment
-**Express.js**: Web framework for Node.js
-**MongoDB**: NoSQL database
-**Mongoose**: ODM library for MongoDB
-**Jest**: Testing framework
+1. **Node.js**: JavaScript runtime environment
+2. **Express.js**: Web framework for Node.js
+3. **MongoDB**: NoSQL database
+4. **Mongoose**: ODM library for MongoDB
+5. **Jest**: Testing framework
 
 ## API Documentation
 
 The backend provides the following CRUD operations via API calls:
 
-**Create an Employee**: POST /api/employees
-**Retrieve All Employees**: GET /api/employees
-**Retrieve a Single Employee**: GET /api/employees/:id
-**Update an Employee**: PUT /api/employees/:id
-**Delete an Employee**: DELETE /api/employees/:id
+1. **Create an Employee**: POST /api/employee
+2. **Retrieve All Employees**: GET /api/employee
+3. **Retrieve a Single Employee**: GET /api/employee/:id
+4. **Update an Employee**: PUT /api/employee/:id
+5. **Delete an Employee**: DELETE /api/employee/:id
 
 Please refer to the Swagger documentation for detailed information on each endpoint.
 
