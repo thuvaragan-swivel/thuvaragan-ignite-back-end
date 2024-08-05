@@ -12,8 +12,16 @@ dotenv.config();
 const expressApp = express(); // Creating an instance of Express application.
 const PORT = process.env.SERVER_PORT; // Getting the server port.
 
+// Disable the 'X-Powered-By' header.
+expressApp.disable('x-powered-by');
+
 // Middleware configuration.
-expressApp.use(cors()); // Enabling CORS for all routes.
+const corsOptions = {
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow only the needed methods.
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowing only the headers needed.
+};
+
+expressApp.use(cors(corsOptions)); // Enabling CORS.
 expressApp.use(bodyParser.json()); // Parsing JSON bodies for incoming requests.
 expressApp.use("/api", expressRouter); // Using the routes defined in the crudRoutes.js file.
 
