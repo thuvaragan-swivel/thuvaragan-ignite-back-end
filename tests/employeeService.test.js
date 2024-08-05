@@ -76,9 +76,6 @@ describe("EmployeeService Tests", () => {
           employeeId: 2,
         },
       ];
-      const query = {
-        $or: [{ firstName: { $regex: "Davidson", $options: "i" } }],
-      };
 
       Employee.find.mockReturnValue({
         sort: jest.fn().mockReturnThis(),

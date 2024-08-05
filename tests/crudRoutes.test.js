@@ -3,7 +3,6 @@
 import request from "supertest";
 import express from "express";
 import expressRouter from "../routes/crudRoutes.js";
-import EmployeeController from "../crud-operations-controller/employeeController.js";
 
 // Creating an express app and using the router.
 const app = express();

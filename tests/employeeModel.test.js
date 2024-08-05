@@ -1,6 +1,5 @@
 // employeeModel.test.js
 
-import mongoose from "mongoose";
 import Employee from "../model/employeeModel.js";
 
 describe("Employee Model", () => {
