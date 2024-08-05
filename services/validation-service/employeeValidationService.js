@@ -24,7 +24,7 @@ class EmployeeValidationService {
       .required("Email Address is Required!")
       .email("Email Address must be in the Format: username@domain.tld")
       .matches(
-        /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
         "Email Address must be in the Format: username@domain.tld"
       ),
 
