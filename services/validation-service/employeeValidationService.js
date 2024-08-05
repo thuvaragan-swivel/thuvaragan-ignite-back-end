@@ -22,11 +22,7 @@ class EmployeeValidationService {
     emailAddress: yup
       .string()
       .required("Email Address is Required!")
-      .email("Email Address must be in the Format: username@domain.tld")
-      .matches(
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-        "Email Address must be in the Format: username@domain.tld"
-      ),
+      .email("Email Address must be in the Format: username@domain.tld"),
 
     phoneNumber: yup
       .string()
