@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "serve": "node expressServer.js",
-    "start": "nodemon expressServer.js"
+    "start": "node expressServer.js"
   },
   "keywords": [],
   "author": "",
