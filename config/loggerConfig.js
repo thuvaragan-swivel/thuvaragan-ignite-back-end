@@ -16,10 +16,6 @@ const logger = winston.createLogger({
 });
 
 // Error handling for transport initialization.
-logger.on("error", (err) => {
-  handleLoggerError(err);
-});
-
 const handleLoggerError = (err) => {
   let loggerErrors = [];
   loggerErrors.push({
@@ -27,5 +23,9 @@ const handleLoggerError = (err) => {
     timestamp: new Date().toISOString(),
   });
 };
+
+logger.on("error", (err) => {
+  handleLoggerError(err);
+});
 
 export default logger;
