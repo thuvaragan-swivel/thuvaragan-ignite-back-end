@@ -9,7 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/crudRoutes.js"
+      "dest": "/expressServer.js"
     }
   ]
 }
