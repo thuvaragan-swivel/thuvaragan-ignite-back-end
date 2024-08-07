@@ -1,5 +1,3 @@
-// crudValidationService.test.js
-
 import CrudValidationService from "../services/validation-service/crudValidationService";
 import Employee from "../model/employeeModel";
 import EmployeeValidationService from "../services/validation-service/employeeValidationService";

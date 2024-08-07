@@ -1,5 +1,3 @@
-// mongoConfig.test.js
-
 import mongoose from "mongoose";
 import connectDB from "../config/mongoConfig.js";
 import logger from "../config/loggerConfig.js";

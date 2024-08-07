@@ -1,5 +1,3 @@
-// appConfig.test.js
-
 describe("Configuration Tests", () => {
   beforeAll(() => {
     // Mocking the server port.

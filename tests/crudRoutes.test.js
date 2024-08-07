@@ -1,5 +1,3 @@
-// crudRoutes.test.js
-
 import request from "supertest";
 import express from "express";
 import expressRouter from "../routes/crudRoutes.js";

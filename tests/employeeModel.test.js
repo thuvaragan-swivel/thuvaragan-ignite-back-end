@@ -1,5 +1,3 @@
-// employeeModel.test.js
-
 import Employee from "../model/employeeModel.js";
 
 describe("Employee Model", () => {

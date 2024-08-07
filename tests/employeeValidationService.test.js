@@ -1,13 +1,11 @@
-// employeeValidationService.test.js
-
 import EmployeeValidationService from "../services/validation-service/employeeValidationService";
 
 describe("EmployeeValidationService", () => {
   it("should validate employee data and return null if data is valid", async () => {
     // Providing data within the validation constraints.
     const data = {
-      firstName: "Jonathan", // Adjusted length to fit within the 10 characters limit.
-      lastName: "Davidson", // Adjusted length to fit within the 10 characters limit.
+      firstName: "Jonathan",
+      lastName: "Davidson",
       emailAddress: "jon.dav@gmail.com",
       phoneNumber: "+94123456789",
       gender: "Male",

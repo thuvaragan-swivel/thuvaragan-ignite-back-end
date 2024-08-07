@@ -1,5 +1,3 @@
-// employeeController.test.js
-
 import EmployeeController from "../crud-operations-controller/employeeController.js";
 import EmployeeService from "../services/employee-service/employeeService.js";
 
