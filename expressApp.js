@@ -28,6 +28,6 @@ const options = {
 customCssUrl: CSS_URL,
 };
 
-expressApp.use('/api-docs', swaggerUi.serveFiles(swaggerDocs, options), swaggerUi.setup(swaggerDocs, options)); // Using Swagger for API Documentation.
+expressApp.use('/api-docs', swaggerUi.serveFiles(swaggerDocs, options), swaggerUi.setup(swaggerDocs, options)); // Using Swagger for the API Documentation.
 
 export default expressApp;
