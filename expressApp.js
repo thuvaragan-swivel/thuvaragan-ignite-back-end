@@ -9,6 +9,9 @@ dotenv.config();
 
 const expressApp = express(); // Creating an instance of Express application.
 
+const CSS_URL =
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css"; // Defining the Swagger UI CSS Output.
+
 // Disable the 'X-Powered-By' header.
 expressApp.disable("x-powered-by");
 
@@ -22,9 +25,7 @@ expressApp.use(cors(corsOptions)); // Enabling CORS.
 expressApp.use(bodyParser.json()); // Parsing JSON bodies for incoming requests.
 expressApp.use("/api", expressRouter); // Using the routes defined in the crudRoutes.js file.
 
-const CSS_URL =
-  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
-
+// Using Swagger for API Documentation.
 expressApp.use(
   "/api-docs",
   swaggerUi.serve,
@@ -33,6 +34,6 @@ expressApp.use(
       ".swagger-ui .opblock .opblock-summary-path-description-wrapper { align-items: center; display: flex; flex-wrap: wrap; gap: 0 10px; padding: 0 10px; width: 100%; }",
     customCssUrl: CSS_URL,
   })
-); // Using Swagger for API Documentation.
+);
 
 export default expressApp;
