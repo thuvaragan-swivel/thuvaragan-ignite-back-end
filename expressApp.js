@@ -22,6 +22,17 @@ expressApp.use(cors(corsOptions)); // Enabling CORS.
 expressApp.use(bodyParser.json()); // Parsing JSON bodies for incoming requests.
 expressApp.use("/api", expressRouter); // Using the routes defined in the crudRoutes.js file.
 
-expressApp.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Using Swagger for API Documentation.
+const CSS_URL =
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+
+expressApp.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocs, {
+    customCss:
+      ".swagger-ui .opblock .opblock-summary-path-description-wrapper { align-items: center; display: flex; flex-wrap: wrap; gap: 0 10px; padding: 0 10px; width: 100%; }",
+    customCssUrl: CSS_URL,
+  })
+); // Using Swagger for API Documentation.
 
 export default expressApp;
