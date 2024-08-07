@@ -1,15 +1,7 @@
-import fs from "fs";
-import path from "path";
 import dotenv from "dotenv";
 import winston from 'winston';
 
 dotenv.config();
-
-const LOG_FILE_PATH = process.env.LOG_FILE;
-
-if (!LOG_FILE_PATH) {
-  throw new Error("LOG_FILE environment variable is not defined.");
-}
 
 // Creating a Winston logger instance.
 const logger = winston.createLogger({
@@ -21,8 +13,7 @@ const logger = winston.createLogger({
     })
   ),
   transports: [
-    new winston.transports.File({ filename: LOG_FILE_PATH }),
-    new winston.transports.Console() // Optional: to also log to the console.
+    new winston.transports.Console()
   ],
 });
 
