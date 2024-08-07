@@ -1,5 +1,5 @@
 import request from 'supertest';
-import expressApp from '../app.js'; // Adjust this path to your actual file
+import expressApp from '../expressApp.js'; // Adjust this path to your actual file
 
 describe('Express Application Basic Coverage', () => {
   // Test the server startup

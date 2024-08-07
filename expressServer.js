@@ -1,4 +1,4 @@
-import expressApp from "./app.js";
+import expressApp from "./expressApp.js";
 import connectDB from "./config/mongoConfig.js";
 import logger from "./config/loggerConfig.js";
 
