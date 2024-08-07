@@ -15,17 +15,4 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-// Error handling for transport initialization.
-const handleLoggerError = (err) => {
-  let loggerErrors = [];
-  loggerErrors.push({
-    message: `Logger error: ${err.message}`,
-    timestamp: new Date().toISOString(),
-  });
-};
-
-logger.on("error", (err) => {
-  handleLoggerError(err);
-});
-
 export default logger;
