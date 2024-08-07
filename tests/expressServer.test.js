@@ -32,7 +32,7 @@ describe('Express Application Basic Coverage', () => {
 
   test('should set up Swagger docs', async () => {
     // Follow redirects to the final URL if needed
-    const response = await request(expressApp).get('/api/docs').redirects(1);
+    const response = await request(expressApp).get('/api-docs').redirects(1);
     expect(response.status).toBe(200); // Check final response status
   });
 });

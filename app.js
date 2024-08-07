@@ -22,6 +22,6 @@ expressApp.use(cors(corsOptions)); // Enabling CORS.
 expressApp.use(bodyParser.json()); // Parsing JSON bodies for incoming requests.
 expressApp.use("/api", expressRouter); // Using the routes defined in the crudRoutes.js file.
 
-expressApp.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Using Swagger for API Documentation.
+expressApp.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Using Swagger for API Documentation.
 
 export default expressApp;
