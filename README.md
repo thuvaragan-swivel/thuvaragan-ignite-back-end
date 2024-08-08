@@ -55,7 +55,7 @@ MONGODB_URL = mongodb+srv://{USER_NAME}:{PASSWORD}@{CLUSTER_NAME}.mongodb.net/{D
 **DB_NAME** -> the name of the database you want to connect to.  
 **APP_NAME** -> This is an optional parameter where you can specify the name of your application for logging purposes (it's mostly the cluster name, but cross-check before proceeding).
 
-* The **SERVER_PORT** has been mentioned as 8000, since this project is using that port.
+* The port (**SERVER_PORT**) used here is **8000**.
 * If you wish to run the server on another port, you can change the port value.
 * Replace the **MONGODB_URL** value with your MongoDB URL.  
 
