@@ -23,13 +23,6 @@ To get started with this project, follow these steps:
     npm install
     ```
 
-4. **Create a `.env.local` file in the root directory and add the necessary environment variables**:
-    ```env
-    SERVER_PORT = 8000
-    MONGODB_URL = "mongodb+srv://thuvaragan-ignite:Ignite123456@cluster-1.nbikk9f.mongodb.net/Ignite_CRUD?retryWrites=true&w=majority&appName=Cluster-1"
-    LOG_FILE = ./server.log
-    ```
-
 ## Usage
 
 To run the project, use the following command in your terminal:
