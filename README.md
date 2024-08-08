@@ -37,12 +37,12 @@ Before you begin, make sure you have the following installed:
 **Step 1**: Create a MongoDB Account (https://www.mongodb.com/)  
 **Step 2**: Create a New Cluster  
 **Step 3**: Configure Your Cluster
-* Create a Database User
-* Configure Network Access
-    - Choose **Allow Access from Anywhere** to allow your local development environment to connect to the cluster.
-* Create a Database
-**Step 4**: Connect to Your Cluster
-**Step 5**: Integrate MongoDB with Your Express Server
+* Create a Database User.
+* Configure Network Access.
+    - Choose **Allow Access from Anywhere** to allow your local development environment to connect to the cluster without IP Address issues.
+* Create a Database.  
+**Step 4**: Connect to Your Cluster  
+**Step 5**: Integrate MongoDB with Your Express Server  
 **Step 6**: Install the required dependencies (check package.json and proceed only if they don't exist in the project):
 ```bash
 npm install mongoose dotenv
