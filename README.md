@@ -39,7 +39,7 @@ Before you begin, make sure you have the following installed:
 **Step 3**: Configure Your Cluster  
 **Step 4**: Connect to Your Cluster  
 **Step 5**: Integrate MongoDB with Your Express Server  
-**Step 6**: Install the required dependencies (check package.json and proceed only if they don't exist in the project):
+**Step 6**: Install the Required Dependencies:
 ```bash
 npm install mongoose dotenv
 ```
@@ -70,7 +70,7 @@ To run the project, use the following command in your terminal:
 ```bash
 npm start
 ```
-This will start the Express server.  
+This will start the Express Server.  
 You can access the server locally at http://localhost:{SERVER_PORT}/api/employee.  
 
 **NOTE**: If you have changed the server port, please know that the server will be running on the port you set.
