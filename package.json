@@ -2,12 +2,12 @@
   "name": "thuvaragan-ignite-back-end",
   "version": "1.0.0",
   "description": "Thuvaragan Sabesan - Ignite Assessment (Back-end) - Swivel",
-  "main": "src/express/expressServer.js",
+  "main": "expressServer.js",
   "type": "module",
   "scripts": {
     "test": "jest",
-    "serve": "node src/express/expressServer.js",
-    "start": "node src/express/expressServer.js"
+    "serve": "node expressServer.js",
+    "start": "node expressServer.js"
   },
   "keywords": [],
   "author": "",

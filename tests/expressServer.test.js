@@ -1,5 +1,5 @@
 import request from 'supertest';
-import expressApp from '../../src/express/expressApp.js';
+import expressApp from '../expressApp.js';
 
 describe('Express Application Basic Coverage', () => {
   // Testing the server startup.

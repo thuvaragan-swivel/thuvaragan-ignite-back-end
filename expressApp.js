@@ -2,8 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
-import expressRouter from "../routes/crudRoutes.js";
-import { swaggerDocs, swaggerUi } from "../swagger/swagger.js";
+import expressRouter from "./src/routes/crudRoutes.js";
+import { swaggerDocs, swaggerUi } from "./src/swagger/swagger.js";
 
 dotenv.config();
 
