@@ -30,7 +30,6 @@ describe("EmployeeValidationService", () => {
       emailAddress: "Email Address is Required!",
       phoneNumber: "Phone Number must be a Valid Sri Lankan Phone Number!",
       gender: "Gender is Required!",
-      employeeId: "Employee ID is Required!",
     });
   });
 });

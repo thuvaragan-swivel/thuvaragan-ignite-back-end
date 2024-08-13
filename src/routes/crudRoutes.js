@@ -42,9 +42,6 @@ const expressRouter = express.Router();
  *                 type: string
  *               gender:
  *                 type: string
- *               employeeId:
- *                 type: integer
- *                 description: Unique Employee ID for the Employee
  *     responses:
  *       201:
  *         description: Employee Created Successfully
@@ -168,9 +165,6 @@ expressRouter.get("/employee/:id", EmployeeController.getEmployeeById); // Route
  *                 type: string
  *               gender:
  *                 type: string
- *               employeeId:
- *                 type: integer
- *                 description: Unique Employee ID for the Employee
  *     responses:
  *       200:
  *         description: Employee Updated Successfully

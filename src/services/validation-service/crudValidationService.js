@@ -5,7 +5,7 @@ class CrudValidationService {
   static async validateAndCheckExistingEmployee(data, id = null) {
     // Validating employee data using EmployeeValidationService.
     const validationErrors = await EmployeeValidationService.validate(data);
-    const { emailAddress, employeeId } = data;
+    const { emailAddress } = data;
     const errors = validationErrors || {};
 
     // If there are validation errors, returning them.
@@ -23,15 +23,6 @@ class CrudValidationService {
     });
     if (emailAddressExist) {
       errors.emailAddress = `An Employee already exists with the Email Address: ${emailAddress} !`;
-    }
-
-    // Checking if an employee with the same employee ID already exists.
-    const employeeIdExist = await Employee.findOne({
-      employeeId,
-      ...(id && { _id: { $ne: id } }),
-    });
-    if (employeeIdExist) {
-      errors.employeeId = `An Employee already exists with the Employee ID: ${employeeId} !`;
     }
 
     if (Object.keys(errors).length > 0) {

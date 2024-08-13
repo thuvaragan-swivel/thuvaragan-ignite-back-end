@@ -27,7 +27,6 @@ const employeeSchema = new mongoose.Schema(
     },
     employeeId: {
       type: Number,
-      required: [true, "Employee ID is Required!"],
       unique: true,
     },
   },
@@ -35,6 +34,15 @@ const employeeSchema = new mongoose.Schema(
     timestamps: true, // To save and manage createdAt and updatedAt data.
   }
 );
+
+// Pre-saving hook to auto-generate employeeId.
+employeeSchema.pre('save', async function (next) {
+  if (!this.employeeId) {
+    const lastEmployee = await this.constructor.findOne().sort({ employeeId: -1 });
+    this.employeeId = lastEmployee ? lastEmployee.employeeId + 1 : 1;
+  }
+  next();
+});
 
 employeeSchema.plugin(mongoosePaginate); // Adding pagination plugin for the schema.
 

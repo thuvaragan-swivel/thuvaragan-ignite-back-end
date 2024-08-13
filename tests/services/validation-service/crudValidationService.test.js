@@ -54,30 +54,6 @@ describe("CrudValidationService", () => {
       });
     });
 
-    test("should return error if employee ID already exists", async () => {
-      const data = { emailAddress: "jon.dav@gmail.com", employeeId: 1 };
-
-      // Mocking validation to return no errors.
-      EmployeeValidationService.validate.mockResolvedValue({});
-
-      // Mocking `Employee.findOne` to return:
-      // 1. A result for the email check.
-      // 2. An existing record for employee ID check.
-      Employee.findOne
-        .mockResolvedValueOnce(null) // For emailAddress check - should return null to proceed to the next check.
-        .mockResolvedValueOnce({}); // For employeeId check - should return an object indicating existing employee ID.
-
-      const result =
-        await CrudValidationService.validateAndCheckExistingEmployee(data);
-
-      expect(result).toEqual({
-        status: 400,
-        message: {
-          employeeId: "An Employee already exists with the Employee ID: 1 !",
-        },
-      });
-    });
-
     test("should return null if no errors", async () => {
       const data = { emailAddress: "jon.dav@gmail.com", employeeId: 1 };
 

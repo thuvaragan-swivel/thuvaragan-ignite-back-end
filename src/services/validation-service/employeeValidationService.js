@@ -40,13 +40,6 @@ class EmployeeValidationService {
       .string()
       .required("Gender is Required!")
       .oneOf(["Male", "Female"], "Gender must be either 'Male' or 'Female'!"),
-
-    employeeId: yup
-      .number()
-      .required("Employee ID is Required!")
-      .typeError("Employee ID must be a Number!")
-      .positive("Employee ID must be a Positive Number!")
-      .integer("Employee ID must be an Integer Value!"),
   });
 
   static async validate(data) {
