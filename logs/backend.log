@@ -1,0 +1,5 @@
+2024-08-13T06:51:27.226Z - INFO: Starting Express Server on Port 8000.
+2024-08-13T06:51:27.228Z - INFO: Attempting to connect to MongoDB at mongodb+srv://thuvaragan-ignite:Ignite123456@cluster-1.nbikk9f.mongodb.net/Ignite_CRUD?retryWrites=true&w=majority&appName=Cluster-1.
+2024-08-13T06:51:28.607Z - INFO: MongoDB Database has been Connected Successfully.
+2024-08-13T06:51:28.609Z - INFO: Express Server is running on Port 8000.
+
