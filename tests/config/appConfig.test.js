@@ -12,7 +12,7 @@ describe("Configuration Tests", () => {
   test("should read port from environment variables", () => {
     // Reset the module registry before requiring the configuration module.
     jest.resetModules();
-    const config = require("../config/appConfig");
+    const config = require("../../src/config/appConfig.js");
     expect(config.appConfig.port).toBe("8000");
   });
 });

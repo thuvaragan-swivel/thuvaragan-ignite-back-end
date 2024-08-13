@@ -1,8 +1,8 @@
-import EmployeeController from "../crud-operations-controller/employeeController.js";
-import EmployeeService from "../services/employee-service/employeeService.js";
+import EmployeeController from "../../src/crud-operations-controller/employeeController.js";
+import EmployeeService from "../../src/services/employee-service/employeeService.js";
 
 // Mocking EmployeeService methods.
-jest.mock("../services/employee-service/employeeService.js");
+jest.mock("../../src/services/employee-service/employeeService.js");
 
 describe("EmployeeController", () => {
   let req, res;

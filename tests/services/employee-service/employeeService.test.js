@@ -1,10 +1,10 @@
-import Employee from "../model/employeeModel.js";
-import CrudValidationService from "../services/validation-service/crudValidationService.js";
-import EmployeeService from "../services/employee-service/employeeService.js";
+import Employee from "../../../src/model/employeeModel.js";
+import CrudValidationService from "../../../src/services/validation-service/crudValidationService.js";
+import EmployeeService from "../../../src/services/employee-service/employeeService.js";
 
 // Mocking the dependencies.
-jest.mock("../model/employeeModel.js");
-jest.mock("../services/validation-service/crudValidationService.js");
+jest.mock("../../../src/model/employeeModel.js");
+jest.mock("../../../src/services/validation-service/crudValidationService.js");
 
 describe("EmployeeService Tests", () => {
   afterEach(() => {

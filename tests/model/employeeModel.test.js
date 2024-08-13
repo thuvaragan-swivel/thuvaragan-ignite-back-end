@@ -1,4 +1,4 @@
-import Employee from "../model/employeeModel.js";
+import Employee from "../../src/model/employeeModel.js";
 
 describe("Employee Model", () => {
   it("should create an Employee schema", () => {

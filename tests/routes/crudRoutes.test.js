@@ -1,6 +1,6 @@
 import request from "supertest";
 import express from "express";
-import expressRouter from "../routes/crudRoutes.js";
+import expressRouter from "../../src/routes/crudRoutes.js";
 
 // Creating an express app and using the router.
 const app = express();
@@ -8,7 +8,7 @@ app.use(express.json()); // Middleware to parse JSON request bodies.
 app.use("/api", expressRouter);
 
 // Mocking the EmployeeController methods.
-jest.mock("../crud-operations-controller/employeeController.js", () => ({
+jest.mock("../../src/crud-operations-controller/employeeController.js", () => ({
   createEmployee: jest.fn((req, res) =>
     res.status(201).send({ message: "Employee created" })
   ),

@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
-import connectDB from "../config/mongoConfig.js";
-import logger from "../config/loggerConfig.js";
+import connectDB from "../../src/config/mongoConfig.js";
+import logger from "../../src/config/loggerConfig.js";
 
 // Mocking the mongoose and logger modules.
 jest.mock("mongoose");
-jest.mock("../config/loggerConfig.js");
+jest.mock("../../src/config/loggerConfig.js");
 
 describe("MongoDB Configuration Tests", () => {
   beforeEach(() => {

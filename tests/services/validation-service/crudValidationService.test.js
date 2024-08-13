@@ -1,9 +1,9 @@
-import CrudValidationService from "../services/validation-service/crudValidationService";
-import Employee from "../model/employeeModel";
-import EmployeeValidationService from "../services/validation-service/employeeValidationService";
+import CrudValidationService from "../../../src/services/validation-service/crudValidationService";
+import Employee from "../../../src/model/employeeModel";
+import EmployeeValidationService from "../../../src/services/validation-service/employeeValidationService";
 
-jest.mock("../model/employeeModel");
-jest.mock("../services/validation-service/employeeValidationService");
+jest.mock("../../../src/model/employeeModel");
+jest.mock("../../../src/services/validation-service/employeeValidationService");
 
 describe("CrudValidationService", () => {
   beforeEach(() => {

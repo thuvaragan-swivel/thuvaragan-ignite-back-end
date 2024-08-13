@@ -1,4 +1,4 @@
-import EmployeeValidationService from "../services/validation-service/employeeValidationService";
+import EmployeeValidationService from "../../../src/services/validation-service/employeeValidationService.js";
 
 describe("EmployeeValidationService", () => {
   it("should validate employee data and return null if data is valid", async () => {
