@@ -1,6 +1,6 @@
 import expressApp from "./expressApp.js";
-import connectDB from "./src/config/mongoConfig.js";
-import logger from "./src/config/loggerConfig.js";
+import connectDB from "../config/mongoConfig.js";
+import logger from "../config/loggerConfig.js";
 
 const PORT = process.env.SERVER_PORT; // Getting the server port.
 
