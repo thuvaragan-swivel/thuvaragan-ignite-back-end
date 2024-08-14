@@ -36,7 +36,7 @@ export const GENDER_VALUES = {
   female: "Female",
 };
 
-// Pagination & Sorting Defaults.
+// Pagination & Sorting Values.
 export const PAGINATION_DEFAULTS = {
   page: 1,
   limit: 12,
