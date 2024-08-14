@@ -12,7 +12,7 @@ if (!MONGO_URL) {
 
 const connectDB = async () => {
   try {
-    logger.info(`Attempting to connect to MongoDB at ${MONGO_URL}.`);
+    logger.info(`Attempting to connect to MongoDB URL.`);
     await mongoose.connect(MONGO_URL);
     logger.info("MongoDB Database has been Connected Successfully.");
   } catch (error) {

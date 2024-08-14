@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import expressRouter from "./src/routes/crudRoutes.js";
 import { swaggerDocs, swaggerUi } from "./src/swagger/swagger.js";
+import logger from "./src/config/loggerConfig.js";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ expressApp.use(bodyParser.json()); // Parsing JSON bodies for incoming requests.
 expressApp.use("/api", expressRouter); // Using the routes defined in the crudRoutes.js file.
 
 // Using Swagger for API Documentation.
+logger.info("Using Swagger for API Documentation.\n")
 expressApp.use(
   "/api-docs",
   swaggerUi.serve,

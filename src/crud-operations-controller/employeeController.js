@@ -1,4 +1,5 @@
 import EmployeeService from "../services/employee-service/employeeService.js";
+import logger from "../config/loggerConfig.js";
 
 class EmployeeController {
   // Method to create a new employee.
@@ -31,8 +32,10 @@ class EmployeeController {
         limit,
         sortBy,
       });
+      logger.info(`Fetched ${result.totalCount} Employees.\n`);
       res.status(result.status).json(result);
     } catch (error) {
+      logger.error(`Error Fetching Employees: ${error.message}\n`);
       res.status(500).json({ errorMessage: error.message });
     }
   }
@@ -43,10 +46,13 @@ class EmployeeController {
       const employeeId = parseInt(req.params.id, 10); // Parsing the employee ID from the request parameters.
       const result = await EmployeeService.getEmployeeById(employeeId); // Calling the service method to get the employee by ID.
       if (result.status) {
+        logger.warn(`Employee Not Found with ID: ${employeeId}\n`);
         return res.status(result.status).json({ message: result.message }); // If a status is present in the result, sending it with the response.
       }
+      logger.info(`Fetched Employee with ID: ${employeeId}\n`);
       res.status(200).json(result);
     } catch (error) {
+      logger.error(`Error Fetching Employee by ID: ${error.message}\n`);
       res.status(500).json({ errorMessage: error.message });
     }
   }
