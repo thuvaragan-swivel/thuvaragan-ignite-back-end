@@ -2,6 +2,7 @@ import * as yup from "yup";
 import {
   VALIDATION_MESSAGES,
   GENDER_VALUES,
+  REGEX_PATTERNS,
 } from "../../config/constantsConfig.js";
 
 // This is for the Employee Data Validation.
@@ -12,14 +13,14 @@ class EmployeeValidationService {
     firstName: yup
       .string()
       .required(VALIDATION_MESSAGES.firstNameRequired)
-      .matches(/^[A-Za-z]+$/, VALIDATION_MESSAGES.firstNameAlpha)
+      .matches(REGEX_PATTERNS.NAME, VALIDATION_MESSAGES.firstNameAlpha)
       .min(6, VALIDATION_MESSAGES.firstNameMin)
       .max(10, VALIDATION_MESSAGES.firstNameMax),
 
     lastName: yup
       .string()
       .required(VALIDATION_MESSAGES.lastNameRequired)
-      .matches(/^[A-Za-z]+$/, VALIDATION_MESSAGES.lastNameAlpha)
+      .matches(REGEX_PATTERNS.NAME, VALIDATION_MESSAGES.lastNameAlpha)
       .min(6, VALIDATION_MESSAGES.lastNameMin)
       .max(10, VALIDATION_MESSAGES.lastNameMax),
 
@@ -27,15 +28,12 @@ class EmployeeValidationService {
       .string()
       .required(VALIDATION_MESSAGES.emailAddressRequired)
       .email(VALIDATION_MESSAGES.emailAddressFormat)
-      .matches(
-        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        VALIDATION_MESSAGES.emailAddressPattern
-      ),
+      .matches(REGEX_PATTERNS.EMAIL, VALIDATION_MESSAGES.emailAddressPattern),
 
     phoneNumber: yup
       .string()
       .required(VALIDATION_MESSAGES.phoneNumberRequired)
-      .matches(/^\+94\d{9}$/, VALIDATION_MESSAGES.phoneNumberPattern),
+      .matches(REGEX_PATTERNS.PHONE, VALIDATION_MESSAGES.phoneNumberPattern),
 
     gender: yup
       .string()
