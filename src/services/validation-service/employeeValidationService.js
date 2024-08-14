@@ -1,4 +1,8 @@
 import * as yup from "yup";
+import {
+  VALIDATION_MESSAGES,
+  GENDER_VALUES,
+} from "../../config/constantsConfig.js";
 
 // This is for the Employee Data Validation.
 // Handling validation using Yup.
@@ -7,39 +11,39 @@ class EmployeeValidationService {
   static employeeValidationSchema = yup.object({
     firstName: yup
       .string()
-      .required("First Name is Required!")
-      .matches(/^[A-Za-z]+$/, "First Name must contain only Alphabets!")
-      .min(6, "First Name must be at least 6 characters long!")
-      .max(10, "First Name must be at most 10 characters long!"),
+      .required(VALIDATION_MESSAGES.firstNameRequired)
+      .matches(/^[A-Za-z]+$/, VALIDATION_MESSAGES.firstNameAlpha)
+      .min(6, VALIDATION_MESSAGES.firstNameMin)
+      .max(10, VALIDATION_MESSAGES.firstNameMax),
 
     lastName: yup
       .string()
-      .required("Last Name is Required!")
-      .matches(/^[A-Za-z]+$/, "Last Name must contain only Alphabets!")
-      .min(6, "Last Name must be at least 6 characters long!")
-      .max(10, "Last Name must be at most 10 characters long!"),
+      .required(VALIDATION_MESSAGES.lastNameRequired)
+      .matches(/^[A-Za-z]+$/, VALIDATION_MESSAGES.lastNameAlpha)
+      .min(6, VALIDATION_MESSAGES.lastNameMin)
+      .max(10, VALIDATION_MESSAGES.lastNameMax),
 
     emailAddress: yup
       .string()
-      .required("Email Address is Required!")
-      .email("Email Address must be in the Format: username@domain.tld")
+      .required(VALIDATION_MESSAGES.emailAddressRequired)
+      .email(VALIDATION_MESSAGES.emailAddressFormat)
       .matches(
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        "Email Address must be in the Format: username@domain.tld"
+        VALIDATION_MESSAGES.emailAddressPattern
       ),
 
     phoneNumber: yup
       .string()
-      .required("Phone Number is Required!")
-      .matches(
-        /^\+94\d{9}$/,
-        "Phone Number must be a Valid Sri Lankan Phone Number!"
-      ),
+      .required(VALIDATION_MESSAGES.phoneNumberRequired)
+      .matches(/^\+94\d{9}$/, VALIDATION_MESSAGES.phoneNumberPattern),
 
     gender: yup
       .string()
-      .required("Gender is Required!")
-      .oneOf(["Male", "Female"], "Gender must be either 'Male' or 'Female'!"),
+      .required(VALIDATION_MESSAGES.genderRequired)
+      .oneOf(
+        [GENDER_VALUES.male, GENDER_VALUES.female],
+        VALIDATION_MESSAGES.genderAllowedValues
+      ),
   });
 
   static async validate(data) {

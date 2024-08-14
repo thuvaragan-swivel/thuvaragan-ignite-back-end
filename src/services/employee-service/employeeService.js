@@ -1,6 +1,11 @@
 import Employee from "../../model/employeeModel.js";
 import CrudValidationService from "../validation-service/crudValidationService.js";
 import logger from "../../config/loggerConfig.js";
+import {
+  STATUS_CODES,
+  LOGGER_MESSAGES,
+  PAGINATION_DEFAULTS,
+} from "../../config/constantsConfig.js";
 
 class EmployeeService {
   // Method to create a new employee.
@@ -9,7 +14,7 @@ class EmployeeService {
       await CrudValidationService.validateAndCheckExistingEmployee(data); // Validating and checking if employee already exists.
     if (validationResult) {
       logger.warn(
-        `Validation Failed:\n${JSON.stringify(validationResult.message, null, 2)}\n`
+        LOGGER_MESSAGES.employeeValidationFailed(validationResult.message)
       );
       // If validation fails, returning the error response.
       return {
@@ -23,15 +28,15 @@ class EmployeeService {
       const newEmployee = new Employee(data);
       const savedEmployeeData = await newEmployee.save();
       logger.info(
-        `New Employee Created with ID: ${savedEmployeeData.employeeId}\n`
+        LOGGER_MESSAGES.employeeCreateSuccess(savedEmployeeData.employeeId)
       );
       return {
-        status: 201,
+        status: STATUS_CODES.created,
         message: `A New Employee named ${savedEmployeeData.firstName} ${savedEmployeeData.lastName} has been Successfully Added to the System.`,
         data: savedEmployeeData,
       };
     } catch (error) {
-      logger.error(`Error Creating Employee: ${error.message}\n`);
+      logger.error(LOGGER_MESSAGES.employeeCreateError(error.message));
       throw error;
     }
   }
@@ -39,10 +44,10 @@ class EmployeeService {
   // Method to get all employees with pagination, sort, and search functionalities.
   async getAllEmployees({
     search,
-    sort = "asc",
-    page = 1,
-    limit = 12,
-    sortBy = "firstName",
+    sort = PAGINATION_DEFAULTS.sort,
+    page = PAGINATION_DEFAULTS.page,
+    limit = PAGINATION_DEFAULTS.limit,
+    sortBy = PAGINATION_DEFAULTS.sortBy,
   }) {
     const query = {};
 
@@ -83,7 +88,7 @@ class EmployeeService {
       const totalPages = Math.ceil(totalCount / limit);
 
       return {
-        status: 200,
+        status: STATUS_CODES.ok,
         data: employees,
         pagination: {
           currentPage: parseInt(page),
@@ -93,7 +98,7 @@ class EmployeeService {
         totalCount,
       };
     } catch (error) {
-      logger.error(`Error Fetching Employees: ${error.message}\n`);
+      logger.error(LOGGER_MESSAGES.employeesFetchError(error.message));
       throw error;
     }
   }
@@ -103,7 +108,11 @@ class EmployeeService {
     try {
       return await CrudValidationService.findEmployeeById(employeeId);
     } catch (error) {
-      logger.error(`Error Retrieving Employee with ID ${employeeId}: ${error.message}\n`);
+      logger.error(
+        LOGGER_MESSAGES.employeeFetchError(
+          `ID ${employeeId}: ${error.message}`
+        )
+      );
       throw error;
     }
   }
@@ -115,8 +124,10 @@ class EmployeeService {
     );
 
     // Checking and returning error if employee does not exist in the system.
-    if (employeeExists.status === 404) {
-      logger.warn(`Employee Not Found with ID: ${employeeId}\n`);
+    if (employeeExists.status === STATUS_CODES.notFound) {
+      logger.warn(
+        LOGGER_MESSAGES.employeeFetchError(`Not Found with ID: ${employeeId}`)
+      );
       return employeeExists; // Return the 404 error object.
     }
 
@@ -128,7 +139,7 @@ class EmployeeService {
       );
     if (validationResult) {
       logger.warn(
-        `Validation Failed:\n${JSON.stringify(validationResult.message, null, 2)}\n`
+        LOGGER_MESSAGES.employeeValidationFailed(validationResult.message)
       );
       return {
         status: validationResult.status,
@@ -146,22 +157,24 @@ class EmployeeService {
 
       // Returning error message if update failed.
       if (!updatedEmployeeData) {
-        logger.error(`Failed to Update Employee with ID: ${employeeId}\n`);
+        logger.error(
+          LOGGER_MESSAGES.employeeUpdateError(`Failed with ID: ${employeeId}`)
+        );
         return {
-          status: 500,
+          status: STATUS_CODES.internalServerError,
           message: "Failed to Update this Employee Data!",
         };
       }
 
       // Returning success response with updated employee data.
-      logger.info(`Updated Employee with ID: ${employeeId}\n`);
+      logger.info(LOGGER_MESSAGES.employeeUpdateSuccess(employeeId));
       return {
-        status: 200,
+        status: STATUS_CODES.ok,
         message: "The Employee Data has been Successfully Updated.",
         data: updatedEmployeeData,
       };
     } catch (error) {
-      logger.error(`Error Updating Employee: ${error.message}\n`);
+      logger.error(LOGGER_MESSAGES.employeeUpdateError(error.message));
       throw error;
     }
   }
@@ -172,20 +185,22 @@ class EmployeeService {
       employeeId
     );
 
-    if (employeeExists.status === 404) {
-      logger.warn(`Employee Not Found with ID: ${employeeId}\n`);
+    if (employeeExists.status === STATUS_CODES.notFound) {
+      logger.warn(
+        LOGGER_MESSAGES.employeeFetchError(`Not Found with ID: ${employeeId}`)
+      );
       return employeeExists;
     }
 
     try {
       await Employee.findOneAndDelete({ employeeId }); // Deleting the employee from the database.
-      logger.info(`Deleted Employee with ID: ${employeeId}\n`);
+      logger.info(LOGGER_MESSAGES.employeeDeleteSuccess(employeeId));
       return {
-        status: 200,
+        status: STATUS_CODES.ok,
         message: `The Employee named ${employeeExists.firstName} ${employeeExists.lastName} is Successfully Deleted from the System.`,
       };
     } catch (error) {
-      logger.error(`Error Deleting Employee: ${error.message}\n`);
+      logger.error(LOGGER_MESSAGES.employeeDeleteError(error.message));
       throw error;
     }
   }

@@ -1,5 +1,6 @@
 import Employee from "../../model/employeeModel.js";
 import EmployeeValidationService from "./employeeValidationService.js";
+import { STATUS_CODES } from "../../config/constantsConfig.js";
 
 class CrudValidationService {
   static async validateAndCheckExistingEmployee(data, id = null) {
@@ -11,7 +12,7 @@ class CrudValidationService {
     // If there are validation errors, returning them.
     if (Object.keys(errors).length > 0) {
       return {
-        status: 400,
+        status: STATUS_CODES.badRequest,
         message: errors,
       };
     }
@@ -22,12 +23,12 @@ class CrudValidationService {
       ...(id && { _id: { $ne: id } }), // Excluding the current employee ID if updating.
     });
     if (emailAddressExist) {
-      errors.emailAddress = `An Employee already exists with the Email Address: ${emailAddress} !`;
+      errors.emailAddress = `An Employee already exists with the Email Address: ${emailAddress}!`;
     }
 
     if (Object.keys(errors).length > 0) {
       return {
-        status: 400,
+        status: STATUS_CODES.badRequest,
         message: errors,
       };
     }
@@ -41,7 +42,7 @@ class CrudValidationService {
     // If the employee does not exist, returning a 404 error.
     if (!employeeExists) {
       return {
-        status: 404,
+        status: STATUS_CODES.notFound,
         message: `The Employee with the ID: ${employeeId} is not Found in the System!`,
       };
     }

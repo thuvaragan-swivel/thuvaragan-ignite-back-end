@@ -1,29 +1,30 @@
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
+import { VALIDATION_MESSAGES } from "../config/constantsConfig.js";
 
 // Defining the employee schema.
 const employeeSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: [true, "First Name is Required!"],
+      required: [true, VALIDATION_MESSAGES.firstNameRequired],
     },
     lastName: {
       type: String,
-      required: [true, "Last Name is Required!"],
+      required: [true, VALIDATION_MESSAGES.lastNameRequired],
     },
     emailAddress: {
       type: String,
-      required: [true, "Email Address is Required!"],
+      required: [true, VALIDATION_MESSAGES.emailAddressRequired],
       unique: true,
     },
     phoneNumber: {
       type: String,
-      required: [true, "Phone Number is Required!"],
+      required: [true, VALIDATION_MESSAGES.phoneNumberRequired],
     },
     gender: {
       type: String,
-      required: [true, "Gender is Required!"],
+      required: [true, VALIDATION_MESSAGES.genderRequired],
     },
     employeeId: {
       type: Number,
