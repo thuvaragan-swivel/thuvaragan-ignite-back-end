@@ -53,7 +53,7 @@ export const STATUS_CODES = {
   internalServerError: 500,
 };
 
-// Logger Messages.
+// Logger Text Messages.
 export const LOGGER_MESSAGES = {
   employeeCreateSuccess: (id) => `New Employee Created with ID: ${id}\n`,
   employeeUpdateSuccess: (id) => `Updated Employee with ID: ${id}\n`,
