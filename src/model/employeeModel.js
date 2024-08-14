@@ -32,13 +32,25 @@ const employeeSchema = new mongoose.Schema(
   },
   {
     timestamps: true, // To save and manage createdAt and updatedAt data.
+
+    toJSON: {
+      transform: (doc, ret) => {
+        // Removing unwanted fields from the output.
+        delete ret._id;
+        delete ret.__v;
+        delete ret.updatedAt;
+        return ret;
+      },
+    },
   }
 );
 
 // Pre-saving hook to auto-generate employeeId.
-employeeSchema.pre('save', async function (next) {
+employeeSchema.pre("save", async function (next) {
   if (!this.employeeId) {
-    const lastEmployee = await this.constructor.findOne().sort({ employeeId: -1 });
+    const lastEmployee = await this.constructor
+      .findOne()
+      .sort({ employeeId: -1 });
     this.employeeId = lastEmployee ? lastEmployee.employeeId + 1 : 1;
   }
   next();
