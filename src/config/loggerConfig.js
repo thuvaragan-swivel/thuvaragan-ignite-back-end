@@ -13,8 +13,8 @@ const logger = winston.createLogger({
     })
   ),
   transports: [
-    // new winston.transports.Console(),
-    new winston.transports.File({ filename: "logs/back-end.log" }), // Log to a file
+    new winston.transports.Console(),
+    // new winston.transports.File({ filename: "logs/back-end.log" }), // Log to a file
   ],
 });
 
