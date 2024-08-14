@@ -52,7 +52,7 @@ class EmployeeController {
       logger.info(`Fetched Employee with ID: ${employeeId}\n`);
       res.status(200).json(result);
     } catch (error) {
-      logger.error(`Error Fetching Employee by ID: ${error.message}\n`);
+      logger.error(`Error Retrieving Employee with ID ${employeeId}: ${error.message}\n`);
       res.status(500).json({ errorMessage: error.message });
     }
   }

@@ -93,6 +93,7 @@ class EmployeeService {
         totalCount,
       };
     } catch (error) {
+      logger.error(`Error Fetching Employees: ${error.message}\n`);
       throw error;
     }
   }
@@ -102,6 +103,7 @@ class EmployeeService {
     try {
       return await CrudValidationService.findEmployeeById(employeeId);
     } catch (error) {
+      logger.error(`Error Retrieving Employee with ID ${employeeId}: ${error.message}\n`);
       throw error;
     }
   }
