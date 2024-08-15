@@ -3,11 +3,7 @@ import winston from "winston";
 
 dotenv.config();
 
-const transports = [
-  new winston.transports.Console(), // Logging to console.
-];
-
-// Conditionally adding file logging if not in a serverless environment.
+// Adding file logging if not in a serverless environment.
 if (
   process.env.NODE_ENV !== "production" &&
   process.env.VERCEL_ENV === undefined
