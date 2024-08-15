@@ -40,7 +40,17 @@ const employeeSchema = new mongoose.Schema(
         delete ret._id;
         delete ret.__v;
         delete ret.updatedAt;
-        return ret;
+
+        // Reordering fields in the output.
+        return {
+          firstName: ret.firstName,
+          lastName: ret.lastName,
+          emailAddress: ret.emailAddress,
+          phoneNumber: ret.phoneNumber,
+          gender: ret.gender,
+          employeeId: ret.employeeId,
+          createdAt: ret.createdAt,
+        };
       },
     },
   }
