@@ -1,6 +1,7 @@
 import request from "supertest";
 import express from "express";
 import expressRouter from "../../src/routes/crudRoutes.js";
+import Employee from "../../src/model/employeeModel.js";
 
 // Creating an express app and using the router.
 const app = express();
@@ -30,12 +31,20 @@ jest.mock("../../src/crud-operations-controller/employeeController.js", () => ({
   ),
 }));
 
+// Mock the Employee model for the check-email route
+jest.mock("../../src/model/employeeModel.js", () => ({
+  findOne: jest.fn(),
+}));
+
 describe("CRUD Routes", () => {
   test("POST /api/employee should create an employee", async () => {
     const res = await request(app).post("/api/employee").send({
       firstName: "Jonathan",
       lastName: "Davidson",
-      email: "jon.dav@gmail.com",
+      emailAddress: "jon.dav@gmail.com", // Use the correct field name
+      phoneNumber: "1234567890",
+      gender: "Male",
+      employeeId: 123,
     });
 
     expect(res.statusCode).toEqual(201);
@@ -64,7 +73,10 @@ describe("CRUD Routes", () => {
     const res = await request(app).put("/api/employee/1").send({
       firstName: "Jonathan",
       lastName: "Davidson",
-      email: "jon.david@gmail.com",
+      emailAddress: "jon.david@gmail.com", // Use the correct field name
+      phoneNumber: "1234567890",
+      gender: "Male",
+      employeeId: 123,
     });
 
     expect(res.statusCode).toEqual(200);
@@ -76,5 +88,26 @@ describe("CRUD Routes", () => {
 
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty("message", "Employee deleted");
+  });
+
+  test("POST /api/employee/check-email should return email existence status", async () => {
+    // Mocking the findOne method to simulate email existence
+    Employee.findOne.mockImplementation(({ emailAddress }) => {
+      if (emailAddress === "exists@example.com") {
+        return Promise.resolve({ emailAddress });
+      } else {
+        return Promise.resolve(null);
+      }
+    });
+
+    // Test for existing email
+    let res = await request(app).post("/api/employee/check-email").send({ emailAddress: "exists@example.com" });
+    expect(res.statusCode).toEqual(400);
+    expect(res.body).toEqual({ exists: true });
+
+    // Test for non-existing email
+    res = await request(app).post("/api/employee/check-email").send({ emailAddress: "new@example.com" });
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toEqual({ exists: false });
   });
 });

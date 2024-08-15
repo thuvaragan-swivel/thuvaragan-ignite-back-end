@@ -1,5 +1,7 @@
 import express from "express";
 import EmployeeController from "../crud-operations-controller/employeeController.js";
+import Employee from "../model/employeeModel.js";
+import { STATUS_CODES } from "../config/constantsConfig.js";
 
 // Creating an Express Router instance.
 const expressRouter = express.Router();
@@ -197,6 +199,22 @@ expressRouter.put("/employee/:id", EmployeeController.updateEmployee); // Route 
  *         description: Internal Server Error
  */
 expressRouter.delete("/employee/:id", EmployeeController.deleteEmployee); // Route to delete an employee by ID.
+
+// Route to check on an Email Address (whether it has already been used by another employee).
+expressRouter.post("/employee/check-email", async (req, res) => {
+  try {
+    const { emailAddress } = req.body;
+    const emailExists = await Employee.findOne({ emailAddress });
+    if (emailExists) {
+      return res.status(STATUS_CODES.badRequest).json({ exists: true });
+    }
+    return res.status(STATUS_CODES.ok).json({ exists: false });
+  } catch (error) {
+    return res
+      .status(STATUS_CODES.internalServerError)
+      .json({ message: "Internal Server Error" });
+  }
+});
 
 // Exporting the router.
 export default expressRouter;
