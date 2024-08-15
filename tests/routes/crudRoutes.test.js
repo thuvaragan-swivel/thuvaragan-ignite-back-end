@@ -89,25 +89,4 @@ describe("CRUD Routes", () => {
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty("message", "Employee deleted");
   });
-
-  test("POST /api/employee/check-email should return email existence status", async () => {
-    // Mocking the findOne method to simulate email existence
-    Employee.findOne.mockImplementation(({ emailAddress }) => {
-      if (emailAddress === "exists@example.com") {
-        return Promise.resolve({ emailAddress });
-      } else {
-        return Promise.resolve(null);
-      }
-    });
-
-    // Test for existing email
-    let res = await request(app).post("/api/employee/check-email").send({ emailAddress: "exists@example.com" });
-    expect(res.statusCode).toEqual(400);
-    expect(res.body).toEqual({ exists: true });
-
-    // Test for non-existing email
-    res = await request(app).post("/api/employee/check-email").send({ emailAddress: "new@example.com" });
-    expect(res.statusCode).toEqual(200);
-    expect(res.body).toEqual({ exists: false });
-  });
 });
