@@ -3,6 +3,9 @@ import winston from "winston";
 
 dotenv.config();
 
+// Initializing an empty array for transports.
+const transports = [];
+
 // Adding file logging if not in a serverless environment.
 if (
   process.env.NODE_ENV !== "production" &&
@@ -24,5 +27,10 @@ const logger = winston.createLogger({
   ),
   transports,
 });
+
+// Checking on transports for logging.
+if (transports.length === 0) {
+  console.warn("No Logging Transport is Configured.");
+}
 
 export default logger;
