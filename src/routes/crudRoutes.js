@@ -1,7 +1,5 @@
 import express from "express";
 import EmployeeController from "../crud-operations-controller/employeeController.js";
-import Employee from "../model/employeeModel.js";
-import { STATUS_CODES } from "../config/constantsConfig.js";
 
 // Creating an Express Router instance.
 const expressRouter = express.Router();
